@@ -13,6 +13,7 @@ import {
 import Home from "./pages/Home/home";
 import List from "./pages/List/list";
 import Add from "./pages/Add/add";
+import Monster from "./components/Monster/monster"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/list" element={<List />} />
         <Route path="/add" element={<Add />} />
+        <Route path="/monsters/:id" element={<Monster/>} />
       </Routes>
     </Router>
   );

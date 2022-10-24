@@ -6,15 +6,15 @@ const MonstersList = () => {
   const [monsters, setMonsters] = useState([]);
   const [currentMonster, setCurrentMonster] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const [searchTitle, setSearchTitle] = useState("");
+  const [searchName, setSearchName] = useState("");
 
   useEffect(() => {
     retrieveMonsters();
   }, []);
 
-  const onChangeSearchTitle = e => {
-    const searchTitle = e.target.value;
-    setSearchTitle(searchTitle);
+  const onChangeSearchName = e => {
+    const searchName = e.target.value;
+    setSearchName(searchName);
   };
 
   const retrieveMonsters = () => {
@@ -50,8 +50,8 @@ const MonstersList = () => {
       });
   };
 
-  const findByTitle = () => {
-    MonsterDataService.findByTitle(searchTitle)
+  const findByName = () => {
+    MonsterDataService.findByName(searchName)
       .then(response => {
         setMonsters(response.data);
         console.log(response.data);
@@ -69,15 +69,15 @@ const MonstersList = () => {
           <input
             type="text"
             className="form-control"
-            placeholder="Search by title"
-            value={searchTitle}
-            onChange={onChangeSearchTitle}
+            placeholder="Search by name"
+            value={searchName}
+            onChange={onChangeSearchName}
           />
           <div className="input-group-append">
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={findByTitle}
+              onClick={findByName}
             >
               Search
             </button>

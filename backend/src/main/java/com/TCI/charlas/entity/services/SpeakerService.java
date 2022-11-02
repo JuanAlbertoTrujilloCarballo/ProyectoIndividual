@@ -42,5 +42,6 @@ public class SpeakerService  implements ISpeakerService {
   public void delete(long id) {
     speakerDao.deleteById(id);
   }
-
+  
+  
 }

@@ -23,7 +23,7 @@ public class SpeakerController {
   
   
   @GetMapping("/speaker")
-  public List<Speaker> getAllMonsters(){
+  public List<Speaker> getAll(){
       return speakerService.getAll();
  }
   @GetMapping("/speaker/{id}")

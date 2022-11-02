@@ -54,13 +54,14 @@ public class Event implements Serializable{
   //@ManyToOne(fetch = FetchType.EAGER)
   private Speaker speaker;
   
+  /*
   @JsonIgnore
   @ManyToMany
   @JoinTable(name = "users_in_event",
           joinColumns = @JoinColumn(name = "event_id"),
           inverseJoinColumns = @JoinColumn(name = "users_id"))
   private Set<User> usersInEvent = new HashSet<>();
-
+*/
 
   public long getId() {
     return id;
@@ -142,7 +143,7 @@ public class Event implements Serializable{
   public void setSpeaker(Speaker speaker) {
     this.speaker = speaker;
   }
-  
+  /*
   public Set<User> getUsersInEvent() {
     return usersInEvent;
   }
@@ -150,5 +151,5 @@ public class Event implements Serializable{
   public void setUsersInEvent(Set<User> usersInEvent) {
     this.usersInEvent = usersInEvent;
   }
-
+*/
 }

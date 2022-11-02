@@ -18,12 +18,13 @@ const AddMonster = () => {
   };
 
   const saveMonster = () => {
-    var data = {
+    console.log("hola");
+    var data = JSON.stringify( {
       name: monster.name,
       title: monster.title,
       weakness: monster.weakness,
       url: monster.url
-    };
+    });
 
     MonsterDataService.create(data)
       .then(response => {
@@ -34,6 +35,10 @@ const AddMonster = () => {
           weakness: response.data.weakness,
           url: response.data.url
         });
+        console.log("name "+data.name);
+        console.log("title "+data.title);
+        console.log("weakness "+data.weakness);
+        console.log("url "+data.url);
         setSubmitted(true);
         console.log(response.data);
       })

@@ -50,18 +50,15 @@ public class Event implements Serializable{
   
   @JsonIgnore
   @ManyToOne
-  //@ManyToOne(fetch = FetchType.LAZY)
-  //@ManyToOne(fetch = FetchType.EAGER)
-  private Speaker speaker;
-  
-  /*
-  @JsonIgnore
+  private Speaker speaker; 
+ 
+
   @ManyToMany
-  @JoinTable(name = "users_in_event",
+  @JoinTable(name = "attendance",
           joinColumns = @JoinColumn(name = "event_id"),
-          inverseJoinColumns = @JoinColumn(name = "users_id"))
-  private Set<User> usersInEvent = new HashSet<>();
-*/
+          inverseJoinColumns = @JoinColumn(name = "user_id"))
+  private Set<AppUser> attendance = new HashSet<>();
+
 
   public long getId() {
     return id;
@@ -121,8 +118,10 @@ public class Event implements Serializable{
     this.tags = tags;
   }
 
+ 
+
   public Event(String location, LocalDateTime initialHour, LocalDateTime finalHour, String title, String description,
-      String tags) {
+      String tags, Speaker speaker, Set<AppUser> attendance) {
     super();
     this.location = location;
     this.initialHour = initialHour;
@@ -130,6 +129,8 @@ public class Event implements Serializable{
     this.title = title;
     this.description = description;
     this.tags = tags;
+    this.speaker = speaker;
+    this.attendance = attendance;
   }
 
   public Event() {
@@ -143,13 +144,13 @@ public class Event implements Serializable{
   public void setSpeaker(Speaker speaker) {
     this.speaker = speaker;
   }
-  /*
-  public Set<User> getUsersInEvent() {
-    return usersInEvent;
+
+  public Set<AppUser> getAttendance() {
+    return attendance;
   }
 
-  public void setUsersInEvent(Set<User> usersInEvent) {
-    this.usersInEvent = usersInEvent;
+  public void setAttendance(Set<AppUser> attendance) {
+    this.attendance = attendance;
   }
-*/
+  
 }

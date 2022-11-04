@@ -7,11 +7,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.TCI.charlas.entity.models.Event;
-//import com.TCI.charlas.entity.models.User;
+import com.TCI.charlas.entity.models.AppUser;
 
 public interface IEventDao extends CrudRepository<Event, Long>{
 
-  //@Query("SELECT s.usersInEvent FROM Event s WHERE s.id = :id")
-  //public List<User> findAllUsersByEventId(@Param("id") String id);
+  @Query("SELECT s.attendance FROM Event s WHERE s.id = :id")
+  public List<AppUser> findAllUsersByEventId(@Param("id") long id);
   
 }

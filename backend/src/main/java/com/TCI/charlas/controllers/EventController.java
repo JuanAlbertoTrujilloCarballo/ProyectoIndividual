@@ -48,6 +48,11 @@ public class EventController {
   public void addSpeakerToEvent(@PathVariable(value = "idSpeaker") long idSpeaker, @PathVariable(value = "idEvent") long idEvent) {
     eventService.addSpeakerToEvent(idSpeaker, idEvent);
   }
+  
+  @PostMapping("/event/{idEvent}/appuser/{idAppUser}")
+  public void addAppUserToEvent(@PathVariable(value = "idAppUser") long idAppUser, @PathVariable(value = "idEvent") long idEvent) {
+    eventService.addAppUserToEvent(idAppUser, idEvent);
+  }
 
   @PutMapping("/event/{id}")
   public void put(Event event, @PathVariable(value = "id") long id) {

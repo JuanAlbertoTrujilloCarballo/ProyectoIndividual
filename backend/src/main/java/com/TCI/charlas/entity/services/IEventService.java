@@ -17,5 +17,6 @@ public interface IEventService {
   
   public List<Event> getAllEvents();
   public void addSpeakerToEvent(long idSpeaker, long idEvent);
+  public void addAppUserToEvent(long idAppUser, long idEvent);
   
 }

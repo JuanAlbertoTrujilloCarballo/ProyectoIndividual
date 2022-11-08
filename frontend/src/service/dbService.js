@@ -1,31 +1,31 @@
 import http from "./http-common";
 
 const getAll = () => {
-  return http.get("/monsters");
+  return http.get("/event");
 };
 
 const get = id => {
-  return http.get(`/monsters/${id}`);
+  return http.get(`/event/${id}`);
 };
 
 const create = data => {
-  return http.post("/monsters", data);
+  return http.post("/event", data);
 };
 
 const update = (id, data) => {
-  return http.put(`/monsters/${id}`, data);
+  return http.put(`/event/${id}`, data);
 };
 
 const remove = id => {
-  return http.delete(`/monsters/${id}`);
+  return http.delete(`/event/${id}`);
 };
 
 const removeAll = () => {
-  return http.delete(`/monsters`);
+  return http.delete(`/event`);
 };
 
 const findByName = name => {
-  return http.get(`/monsters?name=${name}`);
+  return http.get(`/event?name=${name}`);
 };
 
 const dbService = {

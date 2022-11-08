@@ -28,6 +28,8 @@ public class AppUser implements Serializable{
   
   private String username;
   
+  private String password;
+  
   private int age;
   
   private int phone;
@@ -68,6 +70,14 @@ public class AppUser implements Serializable{
 
   public void setUsername(String username) {
     this.username = username;
+  }
+  
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public int getAge() {

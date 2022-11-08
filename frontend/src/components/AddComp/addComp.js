@@ -1,34 +1,36 @@
 import React, { useState } from "react";
-import MonsterDataService from "../../service/dbService";
+import EventDataService from "../../service/dbService";
 
-const AddMonster = () => {
-  const initialMonsterState = {
+const AddEvent = () => {
+  const initialEventState = {
     id: null,
-    name: "",
+    initialHour: "",
+    finalHour: "",
+    location: "",
     title: "",
-    weakness: "",
-    url: "",
+    descrpition: "",
+    tags: "",
   };
-  const [monster, setMonster] = useState(initialMonsterState);
+  const [event, setEvent] = useState(initialEventState);
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
-    setMonster({ ...monster, [name]: value });
+    setEvent({ ...event, [name]: value });
   };
 
-  const saveMonster = () => {
+  const saveEvent = () => {
     console.log("hola");
     var data = JSON.stringify( {
-      name: monster.name,
-      title: monster.title,
-      weakness: monster.weakness,
-      url: monster.url
+      name: event.name,
+      title: event.title,
+      weakness: event.weakness,
+      url: event.url
     });
 
-    MonsterDataService.create(data)
+    EventDataService.create(data)
       .then(response => {
-        setMonster({
+        setEvent({
           id: response.data.id,
           name: response.data.name,
           title: response.data.title,
@@ -47,8 +49,8 @@ const AddMonster = () => {
       });
   };
 
-  const newMonster = () => {
-    setMonster(initialMonsterState);
+  const newEvent = () => {
+    setEvent(initialEventState);
     setSubmitted(false);
   };
 
@@ -57,7 +59,7 @@ const AddMonster = () => {
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
-          <button className="btn btn-success" onClick={newMonster}>
+          <button className="btn btn-success" onClick={newEvent}>
             Add
           </button>
         </div>
@@ -71,7 +73,7 @@ const AddMonster = () => {
               className="form-control"
               id="name"
               required
-              value={monster.name}
+              value={event.name}
               onChange={handleInputChange}
               name="name"
             />
@@ -84,7 +86,7 @@ const AddMonster = () => {
               className="form-control"
               id="title"
               required
-              value={monster.title}
+              value={event.title}
               onChange={handleInputChange}
               name="title"
             />
@@ -97,7 +99,7 @@ const AddMonster = () => {
               className="form-control"
               id="weakness"
               required
-              value={monster.weakness}
+              value={event.weakness}
               onChange={handleInputChange}
               name="weakness"
             />
@@ -110,13 +112,13 @@ const AddMonster = () => {
               className="form-control"
               id="url"
               required
-              value={monster.url}
+              value={event.url}
               onChange={handleInputChange}
               name="url"
             />
           </div>
 
-          <button onClick={saveMonster} className="btn btn-success">
+          <button onClick={saveEvent} className="btn btn-success">
             Submit
           </button>
         </div>
@@ -125,4 +127,4 @@ const AddMonster = () => {
   );
 };
 
-export default AddMonster;
+export default AddEvent;

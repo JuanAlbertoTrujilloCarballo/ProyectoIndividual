@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
-import MonsterDataService from "../../service/dbService";
+import EventDataService from "../../service/dbService";
 import { Link } from "react-router-dom";
+import "./listComp.scss"
 
-const MonstersList = () => {
-  const [monsters, setMonsters] = useState([]);
-  const [currentMonster, setCurrentMonster] = useState(null);
+const EventList = () => {
+  const [event, setEvent] = useState([]);
+  const [currentEvent, setCurrentEvent] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const [searchName, setSearchName] = useState("");
+  const [searchTitle, setsearchTitle] = useState("");
 
   useEffect(() => {
-    retrieveMonsters();
+    retrieveEvent();
   }, []);
 
-  const onChangeSearchName = e => {
-    const searchName = e.target.value;
-    setSearchName(searchName);
+  const onChangeSearchTitle = e => {
+    const searchTitle = e.target.value;
+    setsearchTitle(searchTitle);
   };
 
-  const retrieveMonsters = () => {
-    MonsterDataService.getAll()
+  const retrieveEvent = () => {
+    EventDataService.getAll()
       .then(response => {
-        setMonsters(response.data);
+        setEvent(response.data);
         console.log(response.data);
       })
       .catch(e => {
@@ -29,18 +30,18 @@ const MonstersList = () => {
   };
 
   const refreshList = () => {
-    retrieveMonsters();
-    setCurrentMonster(null);
+    retrieveEvent();
+    setCurrentEvent(null);
     setCurrentIndex(-1);
   };
 
-  const setActiveMonster = (monster, index) => {
-    setCurrentMonster(monster);
+  const setActiveEvent = (event, index) => {
+    setCurrentEvent(event);
     setCurrentIndex(index);
   };
 
-  const removeAllMonsters = () => {
-    MonsterDataService.removeAll()
+  const removeAllEvent = () => {
+    EventDataService.removeAll()
       .then(response => {
         console.log(response.data);
         refreshList();
@@ -50,10 +51,10 @@ const MonstersList = () => {
       });
   };
 
-  const findByName = () => {
-    MonsterDataService.findByName(searchName)
+  const findByTitle = () => {
+    EventDataService.findByTitle(searchTitle)
       .then(response => {
-        setMonsters(response.data);
+        setEvent(response.data);
         console.log(response.data);
       })
       .catch(e => {
@@ -65,82 +66,105 @@ const MonstersList = () => {
 
     <div className="list row">
       <div className="col-md-8">
+        <div className="create-event-div">
+        <button
+              className="add-button"
+              type="button"
+              onClick={findByTitle}
+            >
+              Crear nuevo evento
+            </button>
+
+        </div>
         <div className="input-group mb-3">
           <input
             type="text"
             className="form-control"
             placeholder="Search by name"
-            value={searchName}
-            onChange={onChangeSearchName}
+            value={searchTitle}
+            onChange={onChangeSearchTitle}
           />
           <div className="input-group-append">
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={findByName}
+              onClick={findByTitle}
             >
               Search
             </button>
           </div>
         </div>
       </div>
+    
+    {/* aqui empieza la lista de eventos */}
+
       <div className="col-md-6">
-        <h4>Monsters List</h4>
+        <h4>Event List</h4>
 
         <ul className="list-group">
-          {monsters &&
-            monsters.map((monster, index) => (
+          {event &&
+            event.map((event, index) => (
               <li
                 className={
                   "list-group-item " + (index === currentIndex ? "active" : "")
                 }
-                onClick={() => setActiveMonster(monster, index)}
+                onClick={() => setActiveEvent(event, index)}
                 key={index}
               >
-                {monster.name}
+                {event.title}
+                <p></p>
+                {event.tags}
               </li>
             ))}
         </ul>
 
         <button
           className="m-3 btn btn-sm btn-danger"
-          onClick={removeAllMonsters}
+          onClick={removeAllEvent}
         >
           Remove All
         </button>
       </div>
+
+      {/* aqui termina la lista de eventos */}
+
       <div className="col-md-6">
-        {currentMonster ? (
+        {currentEvent ? (
           <div>
-            <h4>Monster</h4>
-            <div>
-              <label>
-                <strong>Name:</strong>
-              </label>{" "}
-              {currentMonster.name}
-            </div>
+            <h4>Event</h4>
             <div>
               <label>
                 <strong>Title:</strong>
               </label>{" "}
-              {currentMonster.title}
+              {currentEvent.title}
             </div>
             <div>
               <label>
-                <strong>Weakness:</strong>
+                <strong>Initial Hour:</strong>
               </label>{" "}
-              {currentMonster.weakness}
+              {currentEvent.initialHour}
             </div>
             <div>
               <label>
-                <strong>Url:</strong>
+                <strong>Final Hour:</strong>
               </label>{" "}
-              {currentMonster.url}
-              {/* {currentMonster.url ? "Published" : "Pending"} */}
+              {currentEvent.finalHour}
+            </div>
+            <div>
+              <label>
+                <strong>Description:</strong>
+              </label>{" "}
+              {currentEvent.description}
+            </div>
+            <div>
+              <label>
+                <strong>Tags:</strong>
+              </label>{" "}
+              {currentEvent.tags}
             </div>
 
             <Link
-              to={"/monsters/" + currentMonster.id}
+              to={"/event/" + currentEvent.id}
               className="badge badge-warning"
             >
               Edit
@@ -149,7 +173,7 @@ const MonstersList = () => {
         ) : (
           <div>
             <br />
-            <p>Please click on a Monster...</p>
+            <p>Please click on a Event...</p>
           </div>
         )}
       </div>
@@ -158,4 +182,4 @@ const MonstersList = () => {
   );
 };
 
-export default MonstersList;
+export default EventList;

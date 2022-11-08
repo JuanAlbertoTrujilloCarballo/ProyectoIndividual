@@ -1,0 +1,3 @@
+Rubrica PGV
+
+Communication with web service: punto 3

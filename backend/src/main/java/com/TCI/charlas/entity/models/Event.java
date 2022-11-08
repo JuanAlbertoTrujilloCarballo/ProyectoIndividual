@@ -47,6 +47,7 @@ public class Event implements Serializable{
   
   private String tags;
 
+  private byte[] logo;
   
   @JsonIgnore
   @ManyToOne
@@ -152,5 +153,15 @@ public class Event implements Serializable{
   public void setAttendance(Set<AppUser> attendance) {
     this.attendance = attendance;
   }
+
+  public byte[] getLogo() {
+    return logo;
+  }
+
+  public void setLogo(byte[] logo) {
+    this.logo = logo;
+  }
+  
+  
   
 }

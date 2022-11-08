@@ -53,6 +53,11 @@ public class EventController {
   public void addAppUserToEvent(@PathVariable(value = "idAppUser") long idAppUser, @PathVariable(value = "idEvent") long idEvent) {
     eventService.addAppUserToEvent(idAppUser, idEvent);
   }
+  
+  @DeleteMapping("/event/{idEvent}/appuser/{idAppUser}")
+  public void deleteAppUserFromEvent(@PathVariable(value = "idAppUser") long idAppUser, @PathVariable(value = "idEvent") long idEvent) {
+    eventService.deleteAppUserFromEvent(idAppUser, idEvent);
+  }
 
   @PutMapping("/event/{id}")
   public void put(Event event, @PathVariable(value = "id") long id) {

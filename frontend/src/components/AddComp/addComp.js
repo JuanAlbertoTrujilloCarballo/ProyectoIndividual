@@ -8,7 +8,7 @@ const AddEvent = () => {
     finalHour: "",
     location: "",
     title: "",
-    descrpition: "",
+    description: "",
     tags: "",
   };
   const [event, setEvent] = useState(initialEventState);
@@ -21,26 +21,28 @@ const AddEvent = () => {
 
   const saveEvent = () => {
     console.log("hola");
-    var data = JSON.stringify( {
-      name: event.name,
+    var data = {
+      id: event.id,
+      initialHour: event.initialHour,
+      finalHour: event.finalHour,
+      location: event.location,
       title: event.title,
-      weakness: event.weakness,
-      url: event.url
-    });
+      description: event.description,
+      tags: event.tags
+    };
 
     EventDataService.create(data)
       .then(response => {
         setEvent({
           id: response.data.id,
-          name: response.data.name,
+          initialHour: response.data.initialHour,
+          finalHour: response.data.finalHour,
+          location: response.data.location,
           title: response.data.title,
-          weakness: response.data.weakness,
-          url: response.data.url
+          description: response.data.description,
+          tags: response.data.tags
         });
-        console.log("name "+data.name);
-        console.log("title "+data.title);
-        console.log("weakness "+data.weakness);
-        console.log("url "+data.url);
+        console.log("title " + data.title);
         setSubmitted(true);
         console.log(response.data);
       })
@@ -60,22 +62,48 @@ const AddEvent = () => {
         <div>
           <h4>You submitted successfully!</h4>
           <button className="btn btn-success" onClick={newEvent}>
-            Add
+            Añadir Otro
           </button>
         </div>
       ) : (
         <div>
 
           <div className="form-group">
-            <label htmlFor="name">name</label>
+            <label htmlFor="initialHour">Hora Final</label>
             <input
               type="text"
               className="form-control"
-              id="name"
+              id="initialHour"
               required
-              value={event.name}
+              value={event.initialHour}
               onChange={handleInputChange}
-              name="name"
+              name="initialHour"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="finalHour">Hora Final</label>
+            <input
+              type="text"
+              className="form-control"
+              id="finalHour"
+              required
+              value={event.weakness}
+              onChange={handleInputChange}
+              name="finalHour"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="location">Location</label>
+            <input
+              type="text"
+              className="form-control"
+              id="location"
+              required
+              value={event.location}
+              onChange={handleInputChange}
+              name="location"
             />
           </div>
 
@@ -93,30 +121,32 @@ const AddEvent = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="weakness">Weakness</label>
+            <label htmlFor="description">Description</label>
             <input
               type="text"
               className="form-control"
-              id="weakness"
+              id="description"
               required
-              value={event.weakness}
+              value={event.description}
               onChange={handleInputChange}
-              name="weakness"
+              name="description"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="url">Url</label>
+            <label htmlFor="tags">Tags</label>
             <input
               type="text"
               className="form-control"
-              id="url"
+              id="tags"
               required
-              value={event.url}
+              value={event.tags}
               onChange={handleInputChange}
-              name="url"
+              name="tags"
             />
           </div>
+
+
 
           <button onClick={saveEvent} className="btn btn-success">
             Submit

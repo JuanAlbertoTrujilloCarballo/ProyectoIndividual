@@ -9,11 +9,26 @@ const get = id => {
 };
 
 const create = data => {
-  return http.post("/event", data);
+  // var FormData = require('form-data');
+  let dataToSend = new FormData();
+  dataToSend.append("title", data.title);
+  dataToSend.append("initialHour", data.initialHour);
+  dataToSend.append("finalHour", data.finalHour);
+  dataToSend.append("location", data.location);
+  dataToSend.append("description", data.description);
+  dataToSend.append("tags", data.tags);
+  return http.post("/event", dataToSend);
 };
 
 const update = (id, data) => {
-  return http.put(`/event/${id}`, data);
+  let dataToSend = new FormData();
+  dataToSend.append("title", data.title);
+  dataToSend.append("initialHour", data.initialHour);
+  dataToSend.append("finalHour", data.finalHour);
+  dataToSend.append("location", data.location);
+  dataToSend.append("description", data.description);
+  dataToSend.append("tags", data.tags);
+  return http.put(`/event/${id}`, dataToSend);
 };
 
 const remove = id => {

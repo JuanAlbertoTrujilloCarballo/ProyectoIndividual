@@ -9,7 +9,7 @@ export default function Home() {
     <div className="home-container">
       <div className="texto">
         <p>
-          Página la cual muy posiblemente será eliminada en un futuro
+          Js
         </p>
       </div>
     </div>

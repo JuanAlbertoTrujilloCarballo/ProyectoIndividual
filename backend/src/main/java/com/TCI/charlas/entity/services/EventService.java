@@ -1,11 +1,15 @@
 package com.TCI.charlas.entity.services;
 
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.TCI.charlas.entity.dao.IAppUserDao;
 import com.TCI.charlas.entity.dao.IEventDao;
 import com.TCI.charlas.entity.dao.ISpeakerDao;
+import com.TCI.charlas.entity.models.AppUser;
 import com.TCI.charlas.entity.models.Event;
 
 

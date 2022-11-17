@@ -1,5 +1,9 @@
 package com.TCI.charlas.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.TCI.charlas.entity.models.Event;
 import com.TCI.charlas.entity.models.Speaker;
@@ -40,7 +46,9 @@ public class EventController {
   }
 
   @PostMapping("/event")
-  public void post(Event event) {
+  public void post(Event event) { 
+      //@RequestParam("file") MultipartFile logo
+
     eventService.post(event);
   }
 
@@ -68,6 +76,8 @@ public class EventController {
   public void delete(@PathVariable(value = "id") long id) {
     eventService.delete(id);
   }
+  
+  
 
   @RequestMapping("/speakerList")
   @ResponseBody

@@ -15,9 +15,6 @@ export default function Header() {
             <a href="/list" className="header-link">
               Event
             </a>
-            <a href="/add" className="navbar-brand">
-              Add
-            </a>
             {/* <li className="nav-item">
               <Link to={"/add"} className="nav-link">
                 Add

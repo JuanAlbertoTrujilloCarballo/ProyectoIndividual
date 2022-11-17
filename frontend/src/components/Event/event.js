@@ -8,10 +8,12 @@ const Event = props => {
 
   const initialEventState = {
     id: null,
-    name: "",
+    initialHour: "",
+    finalHour: "",
+    location: "",
     title: "",
-    weakness: "",
-    url: "",
+    description: "",
+    tags: "",
   };
   const [currentEvent, setCurrentEvent] = useState(initialEventState);
   const [message, setMessage] = useState("");
@@ -40,10 +42,12 @@ const Event = props => {
   const updatePublished = status => {
     var data = {
       id: currentEvent.id,
-      name: currentEvent.name,
+      initialHour: currentEvent.initialHour,
+      finalHour: currentEvent.finalHour,
       title: currentEvent.title,
-      weakness: currentEvent.weakness,
-      url: currentEvent.url,
+      description: currentEvent.description,
+      location: currentEvent.location,
+      tags: currentEvent.location,
     };
 
     EventDataService.update(currentEvent.id, data)
@@ -86,47 +90,91 @@ const Event = props => {
         <div className="edit-form">
           <h4>Event</h4>
           <form>
-          <div className="form-group">
-              <label htmlFor="name">Name</label>
+            <div className="form-group">
+              <label htmlFor="initialHour">Hora Final</label>
               <input
                 type="text"
                 className="form-control"
-                id="name"
-                name="name"
-                value={currentEvent.name}
+                id="initialHour"
+                required
+                value={currentEvent.initialHour}
                 onChange={handleInputChange}
+                name="initialHour"
               />
             </div>
+
+            <div className="form-group">
+              <label htmlFor="finalHour">Hora Final</label>
+              <input
+                type="text"
+                className="form-control"
+                id="finalHour"
+                required
+                value={currentEvent.weakness}
+                onChange={handleInputChange}
+                name="finalHour"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="location">Location</label>
+              <input
+                type="text"
+                className="form-control"
+                id="location"
+                required
+                value={currentEvent.location}
+                onChange={handleInputChange}
+                name="location"
+              />
+            </div>
+
             <div className="form-group">
               <label htmlFor="title">Title</label>
               <input
                 type="text"
                 className="form-control"
                 id="title"
-                name="title"
+                required
                 value={currentEvent.title}
                 onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="weakness">Weakness</label>
-              <input
-                type="text"
-                className="form-control"
-                id="weakness"
-                name="weakness"
-                value={currentEvent.weakness}
-                onChange={handleInputChange}
+                name="title"
               />
             </div>
 
             <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <input
+                type="text"
+                className="form-control"
+                id="description"
+                required
+                value={currentEvent.description}
+                onChange={handleInputChange}
+                name="description"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="tags">Tags</label>
+              <input
+                type="text"
+                className="form-control"
+                id="tags"
+                required
+                value={currentEvent.tags}
+                onChange={handleInputChange}
+                name="tags"
+              />
+            </div>
+          </form>
+          {/* <div className="form-group">
               <label>
                 <strong>Status:</strong>
               </label>
               {currentEvent.url ? "Published" : "Pending"}
             </div>
-          </form>
+         
 
           {currentEvent.url ? (
             <button
@@ -142,7 +190,7 @@ const Event = props => {
             >
               Publish
             </button>
-          )}
+          )} */}
 
           <button className="badge badge-danger mr-2" onClick={deleteEvent}>
             Delete

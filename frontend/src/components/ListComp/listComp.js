@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import EventDataService from "../../service/dbService";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 import "./listComp.scss"
 
 const EventList = () => {
@@ -62,6 +63,13 @@ const EventList = () => {
       });
   };
 
+  const navigate = useNavigate();
+
+  const addPage=() => {
+    navigate("/add");
+  }
+
+
   return (
 
     <div className="list row">
@@ -70,7 +78,7 @@ const EventList = () => {
         <button
               className="add-button"
               type="button"
-              onClick={findByTitle}
+              onClick={addPage}
             >
               Crear nuevo evento
             </button>

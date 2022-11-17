@@ -47,7 +47,7 @@ public class Event implements Serializable{
   
   private String tags;
 
-  private byte[] logo;
+  private String logo;
   
   @JsonIgnore
   @ManyToOne
@@ -154,11 +154,11 @@ public class Event implements Serializable{
     this.attendance = attendance;
   }
 
-  public byte[] getLogo() {
+  public String getLogo() {
     return logo;
   }
 
-  public void setLogo(byte[] logo) {
+  public void setLogo(String logo) {
     this.logo = logo;
   }
   

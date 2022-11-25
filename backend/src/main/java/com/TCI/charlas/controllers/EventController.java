@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import com.TCI.charlas.entity.models.Speaker;
 import com.TCI.charlas.entity.services.IEventService;
 import com.TCI.charlas.entity.services.ISpeakerService;
 import com.TCI.charlas.entity.services.SpeakerService;
+import com.TCI.charlas.utils.FileUploadUtil;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -46,8 +48,15 @@ public class EventController {
   }
 
   @PostMapping("/event")
-  public void post(Event event) { 
-      //@RequestParam("file") MultipartFile logo
+  public void post(Event event,  
+      @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+    event.setLogo(fileName);
+    
+    //String uploadDir = "C:/Users/Alberto/Desktop/Carpetas/Ciclo/";
+    String uploadDir = "static/images/";
+
+    FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);      
 
     eventService.post(event);
   }
@@ -73,7 +82,8 @@ public class EventController {
   }
 
   @DeleteMapping("/event/{id}")
-  public void delete(@PathVariable(value = "id") long id) {
+  public void delete(@PathVariable(value = "id") long id) throws IOException{
+   eventService.deleteWithImage(id);
     eventService.delete(id);
   }
   
@@ -84,4 +94,18 @@ public class EventController {
   public List<Speaker> speakerList() {
     return speakerService.getAll();
   }
+  
+  @PostMapping("/users/save")
+  public void saveUser(
+          @RequestParam("image") MultipartFile multipartFile) throws IOException {
+      String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+       
+      //String uploadDir = "C:/Users/Alberto/Desktop/Carpetas/Ciclo/";
+      String uploadDir = "static/images/";
+
+      FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+       
+  }
+  
+ 
 }

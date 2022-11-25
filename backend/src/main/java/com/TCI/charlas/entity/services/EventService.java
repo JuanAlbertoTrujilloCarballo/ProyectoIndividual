@@ -1,5 +1,9 @@
 package com.TCI.charlas.entity.services;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 
@@ -89,4 +93,17 @@ public class EventService implements IEventService {
     });
   }
   
+  @Override
+  public void deleteWithImage(long id) throws IOException{
+    eventDao.findById(id).ifPresent((x) -> {
+    Path path = Paths.get("static/images/"+x.getLogo());
+    try {
+      Files.delete(path);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  });
+  }
+
 }

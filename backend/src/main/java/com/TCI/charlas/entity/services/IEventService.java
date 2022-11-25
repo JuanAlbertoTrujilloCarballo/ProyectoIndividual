@@ -1,5 +1,6 @@
 package com.TCI.charlas.entity.services;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.TCI.charlas.entity.models.Event;
@@ -19,6 +20,6 @@ public interface IEventService {
   public void addSpeakerToEvent(long idSpeaker, long idEvent);
   public void addAppUserToEvent(long idAppUser, long idEvent);
   public void deleteAppUserFromEvent(long idAppUser, long idEvent);
-  
+  public void deleteWithImage(long id) throws IOException;
   
 }

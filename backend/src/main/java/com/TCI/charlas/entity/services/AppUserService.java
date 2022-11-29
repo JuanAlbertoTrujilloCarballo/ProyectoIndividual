@@ -13,38 +13,38 @@ import com.TCI.charlas.entity.models.AppUser;
 public class AppUserService implements IAppUserService{
 
   @Autowired
-  private IAppUserDao appUserDao;
+  private IAppUserDao appuserDao;
   
   @Autowired
   private IEventDao eventDao;
   
   @Override
   public AppUser get(long id) {
-    return appUserDao.findById(id).get();
+    return appuserDao.findById(id).get();
   }
 
   @Override
   public List<AppUser> getAll() {
-    return (List<AppUser>) appUserDao.findAll();
+    return (List<AppUser>) appuserDao.findAll();
 
   }
 
   @Override
-  public void post(AppUser appUser) {
-    appUserDao.save(appUser);
+  public void post(AppUser appuser) {
+    appuserDao.save(appuser);
   }
 
   @Override
-  public void put(AppUser appUser, long id) {
-    appUserDao.findById(id).ifPresent((x) -> {
-      appUser.setId(id);
-      appUserDao.save(appUser);
+  public void put(AppUser appuser, long id) {
+    appuserDao.findById(id).ifPresent((x) -> {
+      appuser.setId(id);
+      appuserDao.save(appuser);
     });
   }
 
   @Override
   public void delete(long id) {
-    appUserDao.deleteById(id);
+    appuserDao.deleteById(id);
   }
   
   @Override

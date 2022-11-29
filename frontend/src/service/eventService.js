@@ -43,7 +43,7 @@ const findByName = name => {
   return http.get(`/event?name=${name}`);
 };
 
-const dbService = {
+const eventService = {
   getAll,
   get,
   create,
@@ -53,4 +53,4 @@ const dbService = {
   findByName
 };
 
-export default dbService;
+export default eventService;

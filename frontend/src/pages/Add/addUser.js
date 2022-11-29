@@ -1,12 +1,12 @@
 import Header from "../../components/Header/header";
-import AddEvent from "../../components/AddComp/addComp"
+import AddAppuser from "../../components/AddAppUser/addAppUser"
 
 export default function Add() {
 
   return (
     <>
     <Header />
-    <AddEvent />
+    <AddAppuser />
     </>
   )
 

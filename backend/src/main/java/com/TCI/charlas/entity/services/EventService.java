@@ -27,7 +27,7 @@ public class EventService implements IEventService {
   private ISpeakerDao speakerDao;
   
   @Autowired
-  private IAppUserDao appUserDao;
+  private IAppUserDao appuserDao;
 
   @Override
   public Event get(long id) {
@@ -71,7 +71,7 @@ public class EventService implements IEventService {
   @Override
   public void addAppUserToEvent(long idAppUser, long idEvent) {
     eventDao.findById(idEvent).ifPresent((x) -> {
-      appUserDao.findById(idAppUser).ifPresent((y) -> {
+      appuserDao.findById(idAppUser).ifPresent((y) -> {
         x.getAttendance().add(y);
         eventDao.save(x);
       });
@@ -86,7 +86,7 @@ public class EventService implements IEventService {
   @Override
   public void deleteAppUserFromEvent(long idAppUser, long idEvent) {
     eventDao.findById(idEvent).ifPresent((x) -> {
-      appUserDao.findById(idAppUser).ifPresent((y) -> {
+      appuserDao.findById(idAppUser).ifPresent((y) -> {
         x.getAttendance().remove(y);
         eventDao.save(x);
       });

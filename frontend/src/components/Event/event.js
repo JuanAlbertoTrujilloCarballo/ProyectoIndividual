@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
-import EventDataService from "../../service/dbService";
+import EventDataService from "../../service/eventService";
 
 const Event = props => {
   const { id } = useParams();
@@ -13,7 +13,6 @@ const Event = props => {
     location: "",
     title: "",
     description: "",
-    tags: "",
   };
   const [currentEvent, setCurrentEvent] = useState(initialEventState);
   const [message, setMessage] = useState("");
@@ -47,7 +46,6 @@ const Event = props => {
       title: currentEvent.title,
       description: currentEvent.description,
       location: currentEvent.location,
-      tags: currentEvent.location,
     };
 
     EventDataService.update(currentEvent.id, data)
@@ -65,7 +63,7 @@ const Event = props => {
       .then(response => {
         console.log(response.data);
         setMessage("The event was updated successfully!");
-        navigate("/list");
+        navigate("/eventList");
       })
       .catch(e => {
         console.log(e);
@@ -76,7 +74,7 @@ const Event = props => {
     EventDataService.remove(currentEvent.id)
       .then(response => {
         console.log(response.data);
-        navigate("/list");
+        navigate("/eventList");
       })
       .catch(e => {
         console.log(e);
@@ -152,19 +150,6 @@ const Event = props => {
                 value={currentEvent.description}
                 onChange={handleInputChange}
                 name="description"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="tags">Tags</label>
-              <input
-                type="text"
-                className="form-control"
-                id="tags"
-                required
-                value={currentEvent.tags}
-                onChange={handleInputChange}
-                name="tags"
               />
             </div>
           </form>

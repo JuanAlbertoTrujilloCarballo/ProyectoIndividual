@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EventDataService from "../../service/dbService";
+import EventDataService from "../../service/eventService";
 
 const AddEvent = () => {
   const initialEventState = {
@@ -9,7 +9,7 @@ const AddEvent = () => {
     location: "",
     title: "",
     description: "",
-    tags: "",
+
   };
   const [event, setEvent] = useState(initialEventState);
   const [submitted, setSubmitted] = useState(false);
@@ -28,7 +28,6 @@ const AddEvent = () => {
       location: event.location,
       title: event.title,
       description: event.description,
-      tags: event.tags
     };
 
     EventDataService.create(data)
@@ -40,7 +39,6 @@ const AddEvent = () => {
           location: response.data.location,
           title: response.data.title,
           description: response.data.description,
-          tags: response.data.tags
         });
         console.log("title " + data.title);
         setSubmitted(true);
@@ -60,16 +58,16 @@ const AddEvent = () => {
     <div className="submit-form">
       {submitted ? (
         <div>
-          <h4>You submitted successfully!</h4>
+          <h4>Lo enviaste correctamente!</h4>
           <button className="btn btn-success" onClick={newEvent}>
             Añadir Otro
           </button>
         </div>
       ) : (
         <div>
-
+{/* 
           <div className="form-group">
-            <label htmlFor="initialHour">Hora Final</label>
+            <label htmlFor="initialHour">Hora Inicial</label>
             <input
               type="text"
               className="form-control"
@@ -79,7 +77,7 @@ const AddEvent = () => {
               onChange={handleInputChange}
               name="initialHour"
             />
-          </div>
+          </div> */}
 
           <div className="form-group">
             <label htmlFor="finalHour">Hora Final</label>
@@ -132,21 +130,6 @@ const AddEvent = () => {
               name="description"
             />
           </div>
-
-          <div className="form-group">
-            <label htmlFor="tags">Tags</label>
-            <input
-              type="text"
-              className="form-control"
-              id="tags"
-              required
-              value={event.tags}
-              onChange={handleInputChange}
-              name="tags"
-            />
-          </div>
-
-
 
           <button onClick={saveEvent} className="btn btn-success">
             Submit

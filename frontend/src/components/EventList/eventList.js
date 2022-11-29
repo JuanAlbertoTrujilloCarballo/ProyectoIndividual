@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import EventDataService from "../../service/dbService";
+import EventDataService from "../../service/eventService";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
-import "./listComp.scss"
+import "./eventList.scss"
 
 const EventList = () => {
   const [event, setEvent] = useState([]);
@@ -66,7 +66,7 @@ const EventList = () => {
   const navigate = useNavigate();
 
   const addPage=() => {
-    navigate("/add");
+    navigate("/addEvent");
   }
 
 
@@ -163,12 +163,6 @@ const EventList = () => {
                 <strong>Description:</strong>
               </label>{" "}
               {currentEvent.description}
-            </div>
-            <div>
-              <label>
-                <strong>Tags:</strong>
-              </label>{" "}
-              {currentEvent.tags}
             </div>
 
             <Link

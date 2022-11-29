@@ -20,31 +20,31 @@ import com.TCI.charlas.entity.services.IAppUserService;
 public class AppUserController {
 
   @Autowired
-  IAppUserService appUserService;
+  IAppUserService appuserService;
   
   @GetMapping("/appuser")
   public List<AppUser> getAll(){
-      return appUserService.getAll();
+      return appuserService.getAll();
  }
   @GetMapping("/appuser/{id}")
   public AppUser getOne ( @PathVariable ( value = "id" ) long id ) {
-      return appUserService.get (id) ;
+      return appuserService.get (id) ;
   }
   @PostMapping ("/appuser")
-  public void post(AppUser appUser) {
-    appUserService.post(appUser) ;
+  public void post(AppUser appuser) {
+    appuserService.post(appuser) ;
   }
   @PutMapping("/appuser/{id}")
-  public void put(AppUser appUser, @PathVariable(value = "id") long id) {
-    appUserService.put(appUser, id);
+  public void put(AppUser appuser, @PathVariable(value = "id") long id) {
+    appuserService.put(appuser, id);
  }
   @DeleteMapping ("/appuser/{id}")
   public void delete(@PathVariable(value = "id") long id) {
-    appUserService.delete(id);
+    appuserService.delete(id);
   }
   
   @GetMapping("/appuser/event/{id}")
   private List<AppUser> getUsersInEvent(@PathVariable(value = "id") long id){
-      return appUserService.getAllUsersInEvent(id);
+      return appuserService.getAllUsersInEvent(id);
   }
 }

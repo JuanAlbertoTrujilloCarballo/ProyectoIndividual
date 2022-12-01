@@ -89,9 +89,9 @@ const Event = props => {
           <h4>Event</h4>
           <form>
             <div className="form-group">
-              <label htmlFor="initialHour">Hora Final</label>
+              <label htmlFor="initialHour">Hora Inicial</label>
               <input
-                type="text"
+                type="datetime-local"
                 className="form-control"
                 id="initialHour"
                 required
@@ -104,7 +104,7 @@ const Event = props => {
             <div className="form-group">
               <label htmlFor="finalHour">Hora Final</label>
               <input
-                type="text"
+                type="datetime-local"
                 className="form-control"
                 id="finalHour"
                 required

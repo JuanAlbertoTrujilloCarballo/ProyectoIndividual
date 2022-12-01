@@ -67,7 +67,7 @@ const AppUser = props => {
       .then(response => {
         console.log(response.data);
         setMessage("The appuser was updated successfully!");
-        navigate("/list");
+        navigate("/appuserList");
       })
       .catch(e => {
         console.log(e);
@@ -78,7 +78,7 @@ const AppUser = props => {
     AppUserDataService.remove(currentAppUser.id)
       .then(response => {
         console.log(response.data);
-        navigate("/list");
+        navigate("/appuserList");
       })
       .catch(e => {
         console.log(e);

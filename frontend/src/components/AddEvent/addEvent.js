@@ -65,11 +65,11 @@ const AddEvent = () => {
         </div>
       ) : (
         <div>
-{/* 
+
           <div className="form-group">
             <label htmlFor="initialHour">Hora Inicial</label>
             <input
-              type="text"
+              type="datetime-local"
               className="form-control"
               id="initialHour"
               required
@@ -77,12 +77,12 @@ const AddEvent = () => {
               onChange={handleInputChange}
               name="initialHour"
             />
-          </div> */}
+          </div>
 
           <div className="form-group">
             <label htmlFor="finalHour">Hora Final</label>
             <input
-              type="text"
+              type="datetime-local"
               className="form-control"
               id="finalHour"
               required

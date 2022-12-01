@@ -15,17 +15,15 @@ export default function Header() {
             <a href="/eventList" className="header-link">
               Event
             </a>
-            <div>
-            <a href="/appuserList" className="header-link">
-              Users
-            </a>
-            </div>
             {/* <li className="nav-item">
               <Link to={"/add"} className="nav-link">
                 Add
               </Link>
             </li> */}
           </div>
+          <a href="/appuserList" className="header-link">
+              Users
+            </a>
         </nav>
       </div>
     </>

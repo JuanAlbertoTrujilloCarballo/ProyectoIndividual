@@ -21,7 +21,6 @@ const AddAppUser = () => {
   };
 
   const saveAppUser = () => {
-    console.log("hola");
     var data = {
       id: appuser.id,
       dni: appuser.dni,

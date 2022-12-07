@@ -28,7 +28,7 @@ const AddAppUser = () => {
       username: appuser.username,
       password: appuser.password,
       age: appuser.age,
-      phone: appuser.tags,
+      phone: appuser.phone,
       email: appuser.email
     };
 

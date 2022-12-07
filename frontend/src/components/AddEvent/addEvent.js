@@ -9,27 +9,29 @@ const AddEvent = () => {
     location: "",
     title: "",
     description: "",
-
   };
-  const [event, setEvent] = useState(initialEventState);
+  const [Event, setEvent] = useState(initialEventState);
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
-    setEvent({ ...event, [name]: value });
+    setEvent({ ...Event, [name]: value });
   };
 
   const saveEvent = () => {
     console.log("hola");
     var data = {
-      id: event.id,
-      initialHour: event.initialHour,
-      finalHour: event.finalHour,
-      location: event.location,
-      title: event.title,
-      description: event.description,
+      id: Event.id,
+      initialHour: Event.initialHour,
+      finalHour: Event.finalHour,
+      location: Event.location,
+      title: Event.title,
+      description: Event.description
     };
 
+console.log(data);
+
+    console.log("hola2");
     EventDataService.create(data)
       .then(response => {
         setEvent({
@@ -40,11 +42,11 @@ const AddEvent = () => {
           title: response.data.title,
           description: response.data.description,
         });
-        console.log("title " + data.title);
         setSubmitted(true);
         console.log(response.data);
       })
       .catch(e => {
+        console.log("hola 3 ");
         console.log(e);
       });
   };
@@ -73,20 +75,20 @@ const AddEvent = () => {
               className="form-control"
               id="initialHour"
               required
-              value={event.initialHour}
+              value={Event.initialHour}
               onChange={handleInputChange}
               name="initialHour"
             />
-          </div>
+          </div> 
 
-          <div className="form-group">
+         <div className="form-group">
             <label htmlFor="finalHour">Hora Final</label>
             <input
               type="datetime-local"
               className="form-control"
               id="finalHour"
               required
-              value={event.weakness}
+              value={Event.finalHour}
               onChange={handleInputChange}
               name="finalHour"
             />
@@ -99,7 +101,7 @@ const AddEvent = () => {
               className="form-control"
               id="location"
               required
-              value={event.location}
+              value={Event.location}
               onChange={handleInputChange}
               name="location"
             />
@@ -112,7 +114,7 @@ const AddEvent = () => {
               className="form-control"
               id="title"
               required
-              value={event.title}
+              value={Event.title}
               onChange={handleInputChange}
               name="title"
             />
@@ -125,7 +127,7 @@ const AddEvent = () => {
               className="form-control"
               id="description"
               required
-              value={event.description}
+              value={Event.description}
               onChange={handleInputChange}
               name="description"
             />
@@ -137,6 +139,7 @@ const AddEvent = () => {
         </div>
       )}
     </div>
+    
   );
 };
 

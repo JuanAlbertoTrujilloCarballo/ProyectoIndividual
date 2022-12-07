@@ -48,7 +48,8 @@ public class EventController {
   }
 
   @PostMapping("/event")
-  public void post(Event event,  
+  public void post(Event event) {
+      /*,  
       @RequestParam("image") MultipartFile multipartFile) throws IOException {
     String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
     event.setLogo(fileName);
@@ -57,7 +58,7 @@ public class EventController {
     String uploadDir = "static/images/";
 
     FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);      
-
+*/
     eventService.post(event);
   }
 

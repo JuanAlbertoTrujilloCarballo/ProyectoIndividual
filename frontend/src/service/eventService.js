@@ -11,12 +11,11 @@ const get = id => {
 const create = data => {
   // var FormData = require('form-data');
   let dataToSend = new FormData();
-  dataToSend.append("title", data.title);
   dataToSend.append("initialHour", data.initialHour);
   dataToSend.append("finalHour", data.finalHour);
   dataToSend.append("location", data.location);
+  dataToSend.append("title", data.title);
   dataToSend.append("description", data.description);
-  dataToSend.append("tags", data.tags);
   return http.post("/event", dataToSend);
 };
 
@@ -27,7 +26,6 @@ const update = (id, data) => {
   dataToSend.append("finalHour", data.finalHour);
   dataToSend.append("location", data.location);
   dataToSend.append("description", data.description);
-  dataToSend.append("tags", data.tags);
   return http.put(`/event/${id}`, dataToSend);
 };
 

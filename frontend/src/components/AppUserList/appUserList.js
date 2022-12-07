@@ -71,7 +71,6 @@ const AppUserList = () => {
 
 
   return (
-
     <div className="list row">
       <div className="col-md-8">
         <div className="create-appuser-div">
@@ -180,6 +179,8 @@ const AppUserList = () => {
         )}
       </div>
     </div>
+
+
 
   );
 };

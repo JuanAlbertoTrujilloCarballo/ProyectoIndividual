@@ -71,7 +71,7 @@ const EventList = () => {
 
 
   return (
-
+<>
     <div className="list row">
       <div className="col-md-8">
         <div className="create-event-div">
@@ -180,7 +180,14 @@ const EventList = () => {
         )}
       </div>
     </div>
-
+    <div>
+    <div className="form-group col-md-6">
+      <select name="users" className="form-control">
+        <option>holis</option>
+      </select>
+    </div>
+    </div>
+    </>
   );
 };
 

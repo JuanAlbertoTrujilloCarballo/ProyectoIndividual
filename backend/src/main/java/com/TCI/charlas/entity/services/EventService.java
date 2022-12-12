@@ -10,10 +10,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.TCI.charlas.entity.dao.IAppUserDao;
 import com.TCI.charlas.entity.dao.IEventDao;
 import com.TCI.charlas.entity.dao.ISpeakerDao;
-import com.TCI.charlas.entity.models.AppUser;
+import com.TCI.charlas.entity.dao.IUserDao;
 import com.TCI.charlas.entity.models.Event;
 
 
@@ -27,7 +26,7 @@ public class EventService implements IEventService {
   private ISpeakerDao speakerDao;
   
   @Autowired
-  private IAppUserDao appuserDao;
+  private IUserDao userDao;
 
   @Override
   public Event get(long id) {
@@ -71,7 +70,7 @@ public class EventService implements IEventService {
   @Override
   public void addAppUserToEvent(long idAppUser, long idEvent) {
     eventDao.findById(idEvent).ifPresent((x) -> {
-      appuserDao.findById(idAppUser).ifPresent((y) -> {
+      userDao.findById(idAppUser).ifPresent((y) -> {
         x.getAttendance().add(y);
         eventDao.save(x);
       });
@@ -86,7 +85,7 @@ public class EventService implements IEventService {
   @Override
   public void deleteAppUserFromEvent(long idAppUser, long idEvent) {
     eventDao.findById(idEvent).ifPresent((x) -> {
-      appuserDao.findById(idAppUser).ifPresent((y) -> {
+      userDao.findById(idAppUser).ifPresent((y) -> {
         x.getAttendance().remove(y);
         eventDao.save(x);
       });

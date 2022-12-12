@@ -9,7 +9,7 @@ export default function Home() {
     <div className="home-container">
       <div className="texto">
         <p>
-          Js
+          Esta aplicación ha sido creada usando React
         </p>
       </div>
     </div>

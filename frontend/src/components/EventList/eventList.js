@@ -84,7 +84,7 @@ const EventList = () => {
             </button>
 
         </div>
-        <div className="input-group mb-3">
+        {/* <div className="input-group mb-3">
           <input
             type="text"
             className="form-control"
@@ -101,7 +101,7 @@ const EventList = () => {
               Search
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     
     {/* aqui empieza la lista de eventos */}
@@ -121,17 +121,9 @@ const EventList = () => {
               >
                 {event.title}
                 <p></p>
-                {event.tags}
               </li>
             ))}
         </ul>
-
-        <button
-          className="m-3 btn btn-sm btn-danger"
-          onClick={removeAllEvent}
-        >
-          Remove All
-        </button>
       </div>
 
       {/* aqui termina la lista de eventos */}
@@ -175,7 +167,6 @@ const EventList = () => {
         ) : (
           <div>
             <br />
-            <p>Please click on a Event...</p>
           </div>
         )}
       </div>

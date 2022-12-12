@@ -56,7 +56,7 @@ public class Event implements Serializable{
   @JoinTable(name = "attendance",
           joinColumns = @JoinColumn(name = "event_id"),
           inverseJoinColumns = @JoinColumn(name = "user_id"))
-  private Set<AppUser> attendance = new HashSet<>();
+  private Set<User> attendance = new HashSet<>();
 
 
   public long getId() {
@@ -111,7 +111,7 @@ public class Event implements Serializable{
  
 
   public Event(String location, LocalDateTime initialHour, LocalDateTime finalHour, String title, String description,
-      String tags, Speaker speaker, Set<AppUser> attendance) {
+      String tags, Speaker speaker, Set<User> attendance) {
     super();
     this.location = location;
     this.initialHour = initialHour;
@@ -134,11 +134,11 @@ public class Event implements Serializable{
     this.speaker = speaker;
   }
 
-  public Set<AppUser> getAttendance() {
+  public Set<User> getAttendance() {
     return attendance;
   }
 
-  public void setAttendance(Set<AppUser> attendance) {
+  public void setAttendance(Set<User> attendance) {
     this.attendance = attendance;
   }
 

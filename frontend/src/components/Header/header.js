@@ -8,22 +8,22 @@ export default function Header() {
     <>
       <div>
         <nav className="header">
-          <a href="/home" className="header-link">
-            Home
-          </a>
-          <div>
-            <a href="/eventList" className="header-link">
+        <a href="/eventList" className="header-link">
               Event
             </a>
-            {/* <li className="nav-item">
+          <a href="/home" className="header-link">
+            Información
+          </a>
+            {/*<div>
+           <li className="nav-item">
               <Link to={"/add"} className="nav-link">
                 Add
               </Link>
-            </li> */}
-          </div>
-          <a href="/appuserList" className="header-link">
-              Users
-            </a>
+            </li> 
+          </div>*/}
+          <a href="/signin" className="header-link-signin">
+            Iniciar sesión
+          </a>
         </nav>
       </div>
     </>

@@ -67,6 +67,10 @@ const Login = () => {
     }
   };
 
+  const Register = () => {
+    navigate("/register");
+  }
+
   return (
     <div className="col-md-12">
       <div className="card card-container">
@@ -100,13 +104,22 @@ const Login = () => {
               validations={[required]}
             />
           </div>
-
+        
           <div className="form-group">
             <button className="btn btn-primary btn-block" disabled={loading}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
               <span>Login</span>
+            </button>
+          </div>
+
+          <div className="form-group">
+            <button className="btn btn-primary btn-block" disabled={loading} onClick={Register}>
+              {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+              )}
+              <span>Registrarse</span>
             </button>
           </div>
 

@@ -91,6 +91,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         .antMatchers("/api/test/**").permitAll()
         .antMatchers("/event/**").permitAll()
         .antMatchers("/editEvent/**").permitAll()
+        .antMatchers("/user/**").permitAll()
         .antMatchers("/speaker/**").permitAll()
         .anyRequest().authenticated();
     

@@ -13,9 +13,9 @@ import AddEvent from "./pages/Add/addEvent";
 import Event from "./components/Event/event";
 import EditEvent from './components/EditEvent/editEvent';
 
-import Login from "./components/Users/Login";
-import Register from "./components/Users/Register";
-import Profile from "./components/Users/Profile";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import Profile from "./components/User/Profile";
 import BoardUser from "./components/Boards/userBoard";
 import BoardAdmin from "./components/Boards/adminBoard";
 import Header from './components/Header/header';
@@ -38,7 +38,6 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/user" element={<BoardUser />} />
-            <Route path="/admin" element={<BoardAdmin />} />
           </Routes>
         </Router>
       </>

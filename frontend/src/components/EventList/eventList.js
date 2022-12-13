@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import "./eventList.scss"
 
-import UserService from "../../../src/service/user.service";
+import UserService from "../../service/user.service";
 import AuthService from "../../service/auth.service";
 
 

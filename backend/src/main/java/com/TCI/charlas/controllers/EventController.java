@@ -30,7 +30,6 @@ import com.TCI.charlas.utils.FileUploadUtil;
 
 @RestController
 @CrossOrigin(origins = "*")
-//,allowedHeaders = "*")
 public class EventController {
 
   @Autowired

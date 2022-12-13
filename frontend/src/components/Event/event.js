@@ -2,7 +2,22 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import EventDataService from "../../service/eventService";
 
+import AuthService from "../../service/auth.service";
+
 const Event = props => {
+
+  const [showAdminBoard, setAdmin] = useState(false);
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+      setAdmin(user.roles.includes("ROLE_ADMIN"));
+    }
+  }, []);
+
   const { id } = useParams();
   let navigate = useNavigate();
 
@@ -70,8 +85,12 @@ const Event = props => {
       });
   };
 
-  const deleteEvent = () => {
-    EventDataService.remove(currentEvent.id)
+  const editPage = () => {
+    navigate("/editEvent/"+currentEvent.id);
+  }
+
+  const postUserInEvent = () => {
+    EventDataService.userInEvent(currentEvent.id, currentUser.id)
       .then(response => {
         console.log(response.data);
         navigate("/eventList");
@@ -81,123 +100,66 @@ const Event = props => {
       });
   };
 
+
   return (
-
-    <div>
+    <div className="col-md-6">
       {currentEvent ? (
-        <div className="edit-form">
+        <div>
           <h4>Event</h4>
-          <form>
-            <div className="form-group">
-              <label htmlFor="initialHour">Hora Inicial</label>
-              <input
-                type="datetime-local"
-                className="form-control"
-                id="initialHour"
-                required
-                value={currentEvent.initialHour}
-                onChange={handleInputChange}
-                name="initialHour"
-              />
-            </div>
+          <div>
+            <label>
+              <strong>Title:</strong>
+            </label>{" "}
+            {currentEvent.title}
+          </div>
+          <div>
+            <label>
+              <strong>Initial Hour:</strong>
+            </label>{" "}
+            {currentEvent.initialHour}
+          </div>
+          <div>
+            <label>
+              <strong>Final Hour:</strong>
+            </label>{" "}
+            {currentEvent.finalHour}
+          </div>
+          <div>
+            <label>
+              <strong>Description:</strong>
+            </label>{" "}
+            {currentEvent.description}
+          </div>
 
-            <div className="form-group">
-              <label htmlFor="finalHour">Hora Final</label>
-              <input
-                type="datetime-local"
-                className="form-control"
-                id="finalHour"
-                required
-                value={currentEvent.weakness}
-                onChange={handleInputChange}
-                name="finalHour"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="location">Location</label>
-              <input
-                type="text"
-                className="form-control"
-                id="location"
-                required
-                value={currentEvent.location}
-                onChange={handleInputChange}
-                name="location"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                className="form-control"
-                id="title"
-                required
-                value={currentEvent.title}
-                onChange={handleInputChange}
-                name="title"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <input
-                type="text"
-                className="form-control"
-                id="description"
-                required
-                value={currentEvent.description}
-                onChange={handleInputChange}
-                name="description"
-              />
-            </div>
-          </form>
-          {/* <div className="form-group">
-              <label>
-                <strong>Status:</strong>
-              </label>
-              {currentEvent.url ? "Published" : "Pending"}
-            </div>
-         
-
-          {currentEvent.url ? (
+          {showAdminBoard && (
             <button
-              className="badge badge-primary mr-2"
-              onClick={() => updatePublished(false)}
+              className="add-button"
+              type="button"
+              onClick={editPage}
             >
-              UnPublish
+              Editar Evento
             </button>
-          ) : (
+          )}
+
+          {currentUser && (
             <button
-              className="badge badge-primary mr-2"
-              onClick={() => updatePublished(true)}
+              className="add-button"
+              type="button"
+              onClick={postUserInEvent}
             >
-              Publish
+              Apuntarse
             </button>
-          )} */}
+          )}
 
-          <button className="badge badge-danger mr-2" onClick={deleteEvent}>
-            Delete
-          </button>
 
-          <button
-            type="submit"
-            className="badge badge-success"
-            onClick={updateEvent}
-          >
-            Update
-          </button>
-          <p>{message}</p>
         </div>
+
       ) : (
         <div>
           <br />
-          <p>Please click on a Event...</p>
         </div>
       )}
     </div>
-
   );
 };
 

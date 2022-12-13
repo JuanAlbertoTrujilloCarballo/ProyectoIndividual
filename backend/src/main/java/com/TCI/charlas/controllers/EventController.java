@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -62,25 +63,27 @@ public class EventController {
     eventService.post(event);
   }
 
+  
   @PostMapping("/event/{idEvent}/speaker/{idSpeaker}")
   public void addSpeakerToEvent(@PathVariable(value = "idSpeaker") long idSpeaker, @PathVariable(value = "idEvent") long idEvent) {
     eventService.addSpeakerToEvent(idSpeaker, idEvent);
   }
   
-  @PostMapping("/event/{idEvent}/appuser/{idAppUser}")
-  public void addAppUserToEvent(@PathVariable(value = "idAppUser") long idAppUser, @PathVariable(value = "idEvent") long idEvent) {
-    eventService.addAppUserToEvent(idAppUser, idEvent);
-  }
-  
-  @DeleteMapping("/event/{idEvent}/appuser/{idAppUser}")
-  public void deleteAppUserFromEvent(@PathVariable(value = "idAppUser") long idAppUser, @PathVariable(value = "idEvent") long idEvent) {
-    eventService.deleteAppUserFromEvent(idAppUser, idEvent);
+  @PostMapping("/event/{idEvent}/user/{idUser}")
+  public void addUserToEvent(@PathVariable(value = "idUser") long idUser, @PathVariable(value = "idEvent") long idEvent) {
+    eventService.addUserToEvent(idUser, idEvent);
   }
 
-  @PutMapping("/event/{id}")
+  @DeleteMapping("/event/{idEvent}/user/{idUser}")
+  public void deleteUserFromEvent(@PathVariable(value = "idUser") long idUser, @PathVariable(value = "idEvent") long idEvent) {
+    eventService.deleteUserFromEvent(idUser, idEvent);
+  }
+ 
+  @PutMapping("/editEvent/{id}")
   public void put(Event event, @PathVariable(value = "id") long id) {
     eventService.put(event, id);
   }
+
 
   @DeleteMapping("/event/{id}")
   public void delete(@PathVariable(value = "id") long id) throws IOException{

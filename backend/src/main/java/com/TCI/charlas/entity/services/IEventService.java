@@ -18,8 +18,8 @@ public interface IEventService {
   
   public List<Event> getAllEvents();
   public void addSpeakerToEvent(long idSpeaker, long idEvent);
-  public void addAppUserToEvent(long idAppUser, long idEvent);
-  public void deleteAppUserFromEvent(long idAppUser, long idEvent);
+  public void addUserToEvent(long idUser, long idEvent);
+  public void deleteUserFromEvent(long idUser, long idEvent);
   public void deleteWithImage(long id) throws IOException;
   
 }

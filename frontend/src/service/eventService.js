@@ -26,15 +26,15 @@ const update = (id, data) => {
   dataToSend.append("finalHour", data.finalHour);
   dataToSend.append("location", data.location);
   dataToSend.append("description", data.description);
-  return http.put(`/event/${id}`, dataToSend);
+  return http.put(`/editEvent/${id}`, dataToSend);
 };
+
+const userInEvent = (id, userId )=> {
+  return http.post(`/event/${id}/user${userId}`);
+}
 
 const remove = id => {
   return http.delete(`/event/${id}`);
-};
-
-const removeAll = () => {
-  return http.delete(`/event`);
 };
 
 const findByName = name => {
@@ -47,8 +47,8 @@ const eventService = {
   create,
   update,
   remove,
-  removeAll,
-  findByName
+  findByName,
+  userInEvent
 };
 
 export default eventService;

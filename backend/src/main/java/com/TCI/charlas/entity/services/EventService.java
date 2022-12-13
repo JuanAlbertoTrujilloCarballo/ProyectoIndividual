@@ -68,9 +68,9 @@ public class EventService implements IEventService {
   }
   
   @Override
-  public void addAppUserToEvent(long idAppUser, long idEvent) {
+  public void addUserToEvent(long idUser, long idEvent) {
     eventDao.findById(idEvent).ifPresent((x) -> {
-      userDao.findById(idAppUser).ifPresent((y) -> {
+      userDao.findById(idUser).ifPresent((y) -> {
         x.getAttendance().add(y);
         eventDao.save(x);
       });
@@ -83,9 +83,9 @@ public class EventService implements IEventService {
   }
   
   @Override
-  public void deleteAppUserFromEvent(long idAppUser, long idEvent) {
+  public void deleteUserFromEvent(long idUser, long idEvent) {
     eventDao.findById(idEvent).ifPresent((x) -> {
-      userDao.findById(idAppUser).ifPresent((y) -> {
+      userDao.findById(idUser).ifPresent((y) -> {
         x.getAttendance().remove(y);
         eventDao.save(x);
       });

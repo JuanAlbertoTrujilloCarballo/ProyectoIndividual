@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 //@Table(name="speaker")
 public class Speaker implements Serializable{
@@ -29,6 +31,7 @@ public class Speaker implements Serializable{
   
     private int phone;
      
+    @JsonIgnore
      @OneToMany(mappedBy = "speaker")
      private List<Event> events;
      

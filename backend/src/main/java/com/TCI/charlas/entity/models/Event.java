@@ -47,7 +47,6 @@ public class Event implements Serializable{
 
   private String logo;
   
-  @JsonIgnore
   @ManyToOne
   private Speaker speaker; 
  

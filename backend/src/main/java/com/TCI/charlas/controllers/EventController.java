@@ -30,6 +30,7 @@ import com.TCI.charlas.utils.FileUploadUtil;
 
 @RestController
 @CrossOrigin(origins = "*")
+//,allowedHeaders = "*")
 public class EventController {
 
   @Autowired
@@ -91,13 +92,6 @@ public class EventController {
     eventService.delete(id);
   }
   
-  
-
-  @RequestMapping("/speakerList")
-  @ResponseBody
-  public List<Speaker> speakerList() {
-    return speakerService.getAll();
-  }
   
   @PostMapping("/users/save")
   public void saveUser(

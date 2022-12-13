@@ -1,5 +1,6 @@
 import "./header.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { VscAccount } from 'react-icons/vsc';
 import React, { useState, useEffect } from "react";
 
 import AuthService from "../../service/auth.service";
@@ -18,6 +19,12 @@ export default function Header() {
     }
   }, []);
 
+  class UserIcon extends React.Component {
+    render() {
+      return <a href={"/profile"} className="header-link-signin"> <h3> <VscAccount /> </h3> </a>
+     
+    }
+  }
 
   return (
     <>
@@ -46,9 +53,8 @@ export default function Header() {
 
           {currentUser ? (
             <>
-              <a href={"/profile"} className="header-link-signin">
-                {currentUser.username}
-              </a>
+            <UserIcon/>
+              
               {/* <a href="/login" className="nav-link" onClick={logOut}>
                 LogOut
               </a> */}

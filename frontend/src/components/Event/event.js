@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import EventDataService from "../../service/eventService";
+import "./event.scss"
 
 import AuthService from "../../service/auth.service";
 
@@ -28,7 +29,9 @@ const Event = props => {
     location: "",
     title: "",
     description: "",
+    speaker:"",
   };
+
   const [currentEvent, setCurrentEvent] = useState(initialEventState);
   const [message, setMessage] = useState("");
 
@@ -48,6 +51,7 @@ const Event = props => {
       getEvent(id);
   }, [id]);
 
+
   const handleInputChange = event => {
     const { name, value } = event.target;
     setCurrentEvent({ ...currentEvent, [name]: value });
@@ -61,6 +65,7 @@ const Event = props => {
       title: currentEvent.title,
       description: currentEvent.description,
       location: currentEvent.location,
+      speaker: currentEvent.speaker,
     };
 
     EventDataService.update(currentEvent.id, data)
@@ -105,52 +110,61 @@ const Event = props => {
     <div className="col-md-6">
       {currentEvent ? (
         <div>
-          <h4>Event</h4>
-          <div>
+          <h1  className="title">Event</h1>
+          <div className="element">
             <label>
-              <strong>Title:</strong>
+              <strong>Titulo:</strong>
             </label>{" "}
             {currentEvent.title}
           </div>
-          <div>
+          <div className="element">
             <label>
-              <strong>Initial Hour:</strong>
+              <strong>Hora Inicial:</strong>
             </label>{" "}
             {currentEvent.initialHour}
           </div>
-          <div>
+          <div className="element">
             <label>
-              <strong>Final Hour:</strong>
+              <strong>Hora Final:</strong>
             </label>{" "}
             {currentEvent.finalHour}
           </div>
-          <div>
+          <div className="element">
             <label>
-              <strong>Description:</strong>
+              <strong>Descripción:</strong>
             </label>{" "}
             {currentEvent.description}
           </div>
-
-          {showAdminBoard && (
-            <button
-              className="add-button"
-              type="button"
-              onClick={editPage}
-            >
-              Editar Evento
-            </button>
-          )}
+          <div className="element">
+            <label>
+              <strong>Ponente:</strong>
+            </label>{" "}
+            {currentEvent.speaker.name}
+          </div>
 
           {currentUser && (
+            <div className="sign-event">
             <button
-              className="add-button"
+              className="sign-event-button"
               type="button"
               onClick={postUserInEvent}
             >
               Apuntarse
             </button>
+            </div>
           )}
 
+          {showAdminBoard && (
+            <div className="edit-button">
+            <button
+              
+              type="button"
+              onClick={editPage}
+            >
+              Editar Evento
+            </button>
+            </div>
+          )}
 
         </div>
 

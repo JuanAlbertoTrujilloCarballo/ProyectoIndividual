@@ -30,7 +30,7 @@ const update = (id, data) => {
 };
 
 const userInEvent = (id, userId )=> {
-  return http.post(`/event/${id}/user${userId}`);
+  return http.post(`/event/${id}/user/${userId}`);
 }
 
 const remove = id => {

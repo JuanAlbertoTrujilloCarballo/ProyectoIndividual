@@ -33,6 +33,11 @@ const userInEvent = (id, userId )=> {
   return http.post(`/event/${id}/user/${userId}`);
 }
 
+const speakerInEvent = (id, speakerId )=> {
+  return http.post(`/event/${id}/speaker/${speakerId}`);
+}
+
+
 const remove = id => {
   return http.delete(`/event/${id}`);
 };
@@ -48,7 +53,8 @@ const eventService = {
   update,
   remove,
   findByName,
-  userInEvent
+  userInEvent,
+  speakerInEvent
 };
 
 export default eventService;

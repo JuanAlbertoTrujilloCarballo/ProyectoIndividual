@@ -29,7 +29,7 @@ const Event = props => {
     location: "",
     title: "",
     description: "",
-    speaker:"",
+    speaker: "",
   };
 
   const [currentEvent, setCurrentEvent] = useState(initialEventState);
@@ -91,7 +91,7 @@ const Event = props => {
   };
 
   const editPage = () => {
-    navigate("/editEvent/"+currentEvent.id);
+    navigate("/editEvent/" + currentEvent.id);
   }
 
   const postUserInEvent = () => {
@@ -110,7 +110,7 @@ const Event = props => {
     <div className="col-md-6">
       {currentEvent ? (
         <div>
-          <h1  className="title">Event</h1>
+          <h1 className="title">Event</h1>
           <div className="element">
             <label>
               <strong>Titulo:</strong>
@@ -135,46 +135,56 @@ const Event = props => {
             </label>{" "}
             {currentEvent.description}
           </div>
-          <div className="element">
-            <label>
-              <strong>Ponente:</strong>
-            </label>{" "}
-            {currentEvent.speaker.name}
+
+
+          {currentEvent.speaker !== null ? (
+            <div className="element">
+              <label>
+                <strong>Ponente:</strong>
+              </label>{" "}
+              {currentEvent.speaker.name}
+            </div>
+          ) : (
+            <div/>
+            )}
+
+
+
+              {currentUser && (
+                <div className="sign-event">
+                  <button
+                    className="sign-event-button"
+                    type="button"
+                    onClick={postUserInEvent}
+                  >
+                    Apuntarse
+                  </button>
+                </div>
+              )}
+
+              {showAdminBoard && (
+                <div className="edit-button">
+                  <button
+
+                    type="button"
+                    onClick={editPage}
+                  >
+                    Editar Evento
+                  </button>
+                </div>
+              )}
+
+            </div>
+
+          ) : (
+          <div>
+            <br />
           </div>
-
-          {currentUser && (
-            <div className="sign-event">
-            <button
-              className="sign-event-button"
-              type="button"
-              onClick={postUserInEvent}
-            >
-              Apuntarse
-            </button>
-            </div>
-          )}
-
-          {showAdminBoard && (
-            <div className="edit-button">
-            <button
-              
-              type="button"
-              onClick={editPage}
-            >
-              Editar Evento
-            </button>
-            </div>
-          )}
-
-        </div>
-
-      ) : (
-        <div>
-          <br />
-        </div>
       )}
-    </div>
-  );
+        </div>
+      );
 };
 
-export default Event;
+      export default Event;
+
+

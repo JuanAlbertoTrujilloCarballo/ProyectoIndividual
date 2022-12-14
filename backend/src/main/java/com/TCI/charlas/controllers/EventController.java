@@ -26,7 +26,6 @@ import com.TCI.charlas.entity.models.Speaker;
 import com.TCI.charlas.entity.services.IEventService;
 import com.TCI.charlas.entity.services.ISpeakerService;
 import com.TCI.charlas.entity.services.SpeakerService;
-import com.TCI.charlas.utils.FileUploadUtil;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -50,15 +49,15 @@ public class EventController {
 
   @PostMapping("/event")
   public void post(Event event) {
-      /*,  
+      /*,
       @RequestParam("image") MultipartFile multipartFile) throws IOException {
     String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
     event.setLogo(fileName);
-    
+
     //String uploadDir = "C:/Users/Alberto/Desktop/Carpetas/Ciclo/";
     String uploadDir = "static/images/";
 
-    FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);      
+    FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 */
     eventService.post(event);
   }
@@ -90,19 +89,7 @@ public class EventController {
    eventService.deleteWithImage(id);
     eventService.delete(id);
   }
-  
-  
-  @PostMapping("/users/save")
-  public void saveUser(
-          @RequestParam("image") MultipartFile multipartFile) throws IOException {
-      String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-       
-      //String uploadDir = "C:/Users/Alberto/Desktop/Carpetas/Ciclo/";
-      String uploadDir = "static/images/";
-
-      FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-       
-  }
+   
   
  
 }

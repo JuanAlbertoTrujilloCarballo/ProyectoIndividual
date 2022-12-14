@@ -174,32 +174,6 @@ const EventList = () => {
         <div className="col-md-6">
           {currentEvent ? (
             <div>
-              <h4>Event</h4>
-              <div>
-                <label>
-                  <strong>Title:</strong>
-                </label>{" "}
-                {currentEvent.title}
-              </div>
-              <div>
-                <label>
-                  <strong>Initial Hour:</strong>
-                </label>{" "}
-                {currentEvent.initialHour}
-              </div>
-              <div>
-                <label>
-                  <strong>Final Hour:</strong>
-                </label>{" "}
-                {currentEvent.finalHour}
-              </div>
-              <div>
-                <label>
-                  <strong>Description:</strong>
-                </label>{" "}
-                {currentEvent.description}
-              </div>
-
               <Link
                 to={"/event/" + currentEvent.id}
                 className="badge badge-warning"
@@ -213,15 +187,9 @@ const EventList = () => {
           )}
         </div>
       </div>
-      <div>
-        <div className="form-group col-md-6">
-          <select name="users" className="form-control">
-            <option>holis</option>
-          </select>
-        </div>
-      </div>
     </>
   );
 };
 
 export default EventList;
+

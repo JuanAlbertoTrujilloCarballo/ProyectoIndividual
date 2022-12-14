@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EventDataService from "../../service/eventService";
+
 
 const AddEvent = () => {
   const initialEventState = {
@@ -10,7 +11,9 @@ const AddEvent = () => {
     title: "",
     description: "",
   };
+
   const [Event, setEvent] = useState(initialEventState);
+
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = event => {
@@ -18,8 +21,10 @@ const AddEvent = () => {
     setEvent({ ...Event, [name]: value });
   };
 
+  
+
+
   const saveEvent = () => {
-    console.log("hola");
     var data = {
       id: Event.id,
       initialHour: Event.initialHour,
@@ -29,9 +34,6 @@ const AddEvent = () => {
       description: Event.description
     };
 
-console.log(data);
-
-    console.log("hola2");
     EventDataService.create(data)
       .then(response => {
         setEvent({
@@ -79,9 +81,9 @@ console.log(data);
               onChange={handleInputChange}
               name="initialHour"
             />
-          </div> 
+          </div>
 
-         <div className="form-group">
+          <div className="form-group">
             <label htmlFor="finalHour">Hora Final</label>
             <input
               type="datetime-local"
@@ -133,13 +135,14 @@ console.log(data);
             />
           </div>
 
+
           <button onClick={saveEvent} className="btn btn-success">
             Submit
           </button>
         </div>
       )}
     </div>
-    
+
   );
 };
 

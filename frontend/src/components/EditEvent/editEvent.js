@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import EventDataService from "../../service/eventService";
+import SpeakerDataService from "../../service/speakerService";
 
 const EditEvent = props => {
   const { id } = useParams();
@@ -15,7 +16,9 @@ const EditEvent = props => {
     description: "",
   };
   const [currentEvent, setCurrentEvent] = useState(initialEventState);
+  const [speaker, setSpeaker] = useState([]);
   const [message, setMessage] = useState("");
+  const [selectedSpeaker, setSelectedSpeaker] = useState(null);
 
   const getEvent = id => {
     EventDataService.get(id)
@@ -33,10 +36,37 @@ const EditEvent = props => {
       getEvent(id);
   }, [id]);
 
+  const handleSelectChange = e => {
+    // const { name, value } = e.target;
+    // setSpeaker({ ...speaker, [name]: value });
+    // setSpeaker(e.target.value);
+
+    setCurrentEvent({ ...currentEvent, idSpeaker: e.target.value });
+  }
+
+
+  const retrieveSpeaker = () => {
+    SpeakerDataService.getAll()
+      .then(response => {
+        setSpeaker(response.data);
+        console.log(response.data);
+        console.log("aqui")
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    retrieveSpeaker();
+  }, []);
+
+
   const handleInputChange = event => {
     const { name, value } = event.target;
     setCurrentEvent({ ...currentEvent, [name]: value });
   };
+
 
   const updatePublished = status => {
     var data = {
@@ -61,9 +91,17 @@ const EditEvent = props => {
   const updateEvent = () => {
     EventDataService.update(currentEvent.id, currentEvent)
       .then(response => {
-        console.log(response.data);
-        setMessage("The event was updated successfully!");
-        navigate("/eventList");
+        EventDataService.speakerInEvent(currentEvent.id, currentEvent.idSpeaker)
+          .then(r => {
+            console.log(r.data);
+            navigate("/eventList");
+          })
+          .catch(e => {
+            console.log(e);
+          });
+        // console.log(response.data);
+        // setMessage("The event was updated successfully!");
+        // navigate("/eventList");
       })
       .catch(e => {
         console.log(e);
@@ -72,6 +110,17 @@ const EditEvent = props => {
 
   const deleteEvent = () => {
     EventDataService.remove(currentEvent.id)
+      .then(response => {
+        console.log(response.data);
+        navigate("/eventList");
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  const postSpeakerInEvent = () => {
+    EventDataService.speakerInEvent(currentEvent.id, speaker.id)
       .then(response => {
         console.log(response.data);
         navigate("/eventList");
@@ -152,6 +201,21 @@ const EditEvent = props => {
                 name="description"
               />
             </div>
+
+
+            <div className="form-group">
+              <label htmlFor="description">Ponente</label>
+              <select
+                id="speaker"
+                name="speaker"
+                className="form-control"
+                onChange={handleSelectChange}>
+                {speaker.map((speaker, index) => (
+                  <option key={index} value={speaker.idSpeaker}>{speaker.name}</option>
+                ))}
+              </select>
+            </div>
+
           </form>
           {/* <div className="form-group">
               <label>

@@ -16,8 +16,29 @@
 }
 
 .event-image{
-  display:flex;
-  width: 60mm;
-  height: 40mm;
+  
+  width: 40mm;
+  height: 30mm;
   margin: auto;
+}
+
+.list-event{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-evenly; 
+  column-gap: 50px;
+}
+
+.event-title{
+  display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.5em;
+}
+
+.center-list{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

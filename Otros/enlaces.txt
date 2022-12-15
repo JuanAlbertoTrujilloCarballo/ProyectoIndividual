@@ -3,3 +3,7 @@ https://react-bootstrap.github.io/components/dropdowns/
 w.bezkoder.com/spring-boot-refresh-token-jwt/
 
 https://www.youtube.com/watch?v=tli5n_NqQW8
+
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+https://www.youtube.com/watch?v=1S2BEaV3JYU

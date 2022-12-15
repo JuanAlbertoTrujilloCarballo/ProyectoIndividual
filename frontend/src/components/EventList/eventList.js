@@ -142,48 +142,52 @@ const EventList = () => {
 
         {/* aqui empieza la lista de eventos */}
 
-        <div className="col-md-6">
-          <h4>Event List</h4>
+        <div >
+          <div className="center-list">
+            <h4>Event List</h4>
 
-          <ul className="list-group">
-            {event &&
-              event.map((event, index) => (
-                <li
-                  className={
-                    "list-group-item " + (index === currentIndex ? "active" : "")
-                  }
-                  onClick={() => setActiveEvent(event, index)}
-                  key={index}
+            <ul className="list-group">
+              {event &&
+                event.map((event, index) => (
+                  <li
+                    className={
+                      "list-group-item " + (index === currentIndex ? "active" : "")
+                    }
+                    onClick={() => setActiveEvent(event, index)}
+                    key={index}
+                  >
+                    <div className="list-event">
+                      <div className="col">
+                        <img src={`data:${event.typeImg};base64,${event.image}`}
+                          alt=" " className="event-image" />
+
+                      </div>
+                      <div className="event-title">
+                        <div>
+                          {event.title}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+            </ul>
+          </div>
+
+          {/* aqui termina la lista de eventos */}
+
+          <div className="col-md-6">
+            {currentEvent ? (
+              <div>
+                <Link
+                  to={"/event/" + currentEvent.id}
+                  className="badge badge-warning"
                 >
-                  <div>
-                    <div>
-                      <img src={`data:${event.typeImg};base64,${event.image}`}
-                      alt=" " className="event-image"/>
-
-                    </div>
-                    <div>
-                      {event.title}
-                    </div>
-                  </div>
-                </li>
-              ))}
-          </ul>
-        </div>
-
-        {/* aqui termina la lista de eventos */}
-
-        <div className="col-md-6">
-          {currentEvent ? (
-            <div>
-              <Link
-                to={"/event/" + currentEvent.id}
-                className="badge badge-warning"
-              >
-              </Link>
-            </div>
-          ) : (
-            <div />
-          )}
+                </Link>
+              </div>
+            ) : (
+              <div />
+            )}
+          </div>
         </div>
       </div>
     </>

@@ -14,11 +14,11 @@ const EditEvent = props => {
     location: "",
     title: "",
     description: "",
+    speaker:"",
   };
   const [currentEvent, setCurrentEvent] = useState(initialEventState);
   const [speaker, setSpeaker] = useState([]);
   const [message, setMessage] = useState("");
-  const [selectedSpeaker, setSelectedSpeaker] = useState(null);
 
   const getEvent = id => {
     EventDataService.get(id)
@@ -41,7 +41,8 @@ const EditEvent = props => {
     // setSpeaker({ ...speaker, [name]: value });
     // setSpeaker(e.target.value);
 
-    setCurrentEvent({ ...currentEvent, idSpeaker: e.target.value });
+    setCurrentEvent({ ...currentEvent, speaker: e.target.value });
+    console.log(currentEvent);
   }
 
 
@@ -76,6 +77,7 @@ const EditEvent = props => {
       title: currentEvent.title,
       description: currentEvent.description,
       location: currentEvent.location,
+      speaker: currentEvent.speaker.idSpeaker,
     };
 
     EventDataService.update(currentEvent.id, data)
@@ -90,18 +92,10 @@ const EditEvent = props => {
 
   const updateEvent = () => {
     EventDataService.update(currentEvent.id, currentEvent)
-      .then(response => {
-        EventDataService.speakerInEvent(currentEvent.id, currentEvent.idSpeaker)
-          .then(r => {
-            console.log(r.data);
-            navigate("/eventList");
-          })
-          .catch(e => {
-            console.log(e);
-          });
-        // console.log(response.data);
-        // setMessage("The event was updated successfully!");
-        // navigate("/eventList");
+      .then(response => {     
+        console.log(response.data);
+        setMessage("The event was updated successfully!");
+        navigate("/eventList");
       })
       .catch(e => {
         console.log(e);
@@ -119,16 +113,16 @@ const EditEvent = props => {
       });
   };
 
-  const postSpeakerInEvent = () => {
-    EventDataService.speakerInEvent(currentEvent.id, speaker.id)
-      .then(response => {
-        console.log(response.data);
-        navigate("/eventList");
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
+  // const postSpeakerInEvent = () => {
+  //   EventDataService.speakerInEvent(currentEvent.id, speaker.id)
+  //     .then(response => {
+  //       console.log(response.data);
+  //       navigate("/eventList");
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     });
+  // };
 
   return (
 
@@ -157,7 +151,7 @@ const EditEvent = props => {
                 className="form-control"
                 id="finalHour"
                 required
-                value={currentEvent.weakness}
+                value={currentEvent.finalHour}
                 onChange={handleInputChange}
                 name="finalHour"
               />

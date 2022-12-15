@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import EventDataService from "../../service/eventService";
-
+import SpeakerDataService from "../../service/speakerService";
 
 const AddEvent = () => {
   const initialEventState = {
@@ -10,10 +10,10 @@ const AddEvent = () => {
     location: "",
     title: "",
     description: "",
+    speaker:""
   };
-
   const [Event, setEvent] = useState(initialEventState);
-
+  const [speaker, setSpeaker] = useState([]);
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = event => {
@@ -21,7 +21,30 @@ const AddEvent = () => {
     setEvent({ ...Event, [name]: value });
   };
 
+  const handleSelectChange = e => {
+    // const { name, value } = e.target;
+    // setSpeaker({ ...speaker, [name]: value });
+    // setSpeaker(e.target.value);
+
+    setEvent({ ...Event, speaker: e.target.value });
   
+  }
+
+  const retrieveSpeaker = () => {
+    SpeakerDataService.getAll()
+      .then(response => {
+        setSpeaker(response.data);
+        console.log(response.data);
+        console.log("aqui")
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    retrieveSpeaker();
+  }, []);
 
 
   const saveEvent = () => {
@@ -31,7 +54,8 @@ const AddEvent = () => {
       finalHour: Event.finalHour,
       location: Event.location,
       title: Event.title,
-      description: Event.description
+      description: Event.description,
+      speaker: Event.speaker
     };
 
     EventDataService.create(data)
@@ -43,6 +67,7 @@ const AddEvent = () => {
           location: response.data.location,
           title: response.data.title,
           description: response.data.description,
+          speaker: response.data.speaker,
         });
         setSubmitted(true);
         console.log(response.data);
@@ -106,6 +131,7 @@ const AddEvent = () => {
               value={Event.location}
               onChange={handleInputChange}
               name="location"
+              pattern="[A-Za-z]"
             />
           </div>
 
@@ -134,6 +160,21 @@ const AddEvent = () => {
               name="description"
             />
           </div>
+
+
+          <div className="form-group">
+            <label htmlFor="description">Ponente</label>
+            <select
+              id="speaker"
+              name="speaker"
+              className="form-control"
+              onChange={handleSelectChange}>
+              {speaker.map((speaker, index) => (
+                <option key={index} value={speaker.idSpeaker}>{speaker.name}</option>
+              ))}
+            </select>
+          </div>
+
 
 
           <button onClick={saveEvent} className="btn btn-success">

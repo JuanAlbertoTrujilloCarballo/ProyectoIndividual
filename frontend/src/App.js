@@ -19,6 +19,7 @@ import Profile from "./components/User/Profile";
 import BoardUser from "./components/Boards/userBoard";
 import BoardAdmin from "./components/Boards/adminBoard";
 import Header from './components/Header/header';
+import EditUser from './components/User/editUser';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="/editEvent/:id" element={<EditEvent/>}/>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/user/:id" element={<EditUser/>}/>
             <Route path="/profile" element={<Profile />} />
             <Route path="/user" element={<BoardUser />} />
           </Routes>

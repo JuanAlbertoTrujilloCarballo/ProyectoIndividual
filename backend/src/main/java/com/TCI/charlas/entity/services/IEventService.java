@@ -20,6 +20,5 @@ public interface IEventService {
   public void addSpeakerToEvent(long idSpeaker, long idEvent);
   public void addUserToEvent(long idUser, long idEvent);
   public void deleteUserFromEvent(long idUser, long idEvent);
-  public void deleteWithImage(long id) throws IOException;
   
 }

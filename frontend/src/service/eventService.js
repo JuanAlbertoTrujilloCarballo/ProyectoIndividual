@@ -16,6 +16,7 @@ const create = data => {
   dataToSend.append("location", data.location);
   dataToSend.append("title", data.title);
   dataToSend.append("description", data.description);
+  dataToSend.append("speaker", data.speaker)
   return http.post("/event", dataToSend);
 };
 
@@ -26,6 +27,7 @@ const update = (id, data) => {
   dataToSend.append("finalHour", data.finalHour);
   dataToSend.append("location", data.location);
   dataToSend.append("description", data.description);
+  dataToSend.append("speaker", data.speaker)
   return http.put(`/editEvent/${id}`, dataToSend);
 };
 

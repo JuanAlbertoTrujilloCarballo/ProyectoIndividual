@@ -6,17 +6,14 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,39 +21,45 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 //@Table(name="event")
-public class Event implements Serializable{
-  
+public class Event implements Serializable {
+
   private static final long serialVersionUID = 1L;
-  
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  
+
   private String location;
-  
+
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private LocalDateTime initialHour;
-  
+
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private LocalDateTime finalHour;
-  
+
   private String title;
-  
+
   private String description;
 
-  private String logo;
-  
+  private String nameImg;
+
+  private String typeImg;
+
+  @Column(name = "image", unique = false, length = 100000)
+  private byte[] image;
+
   @ManyToOne
-  private Speaker speaker; 
- 
+  private Speaker speaker;
 
   @ManyToMany
   @JoinTable(name = "attendance",
           joinColumns = @JoinColumn(name = "event_id"),
           inverseJoinColumns = @JoinColumn(name = "user_id"))
   private Set<User> attendance = new HashSet<>();
-
 
   public long getId() {
     return id;
@@ -97,7 +100,6 @@ public class Event implements Serializable{
   public void setTitle(String title) {
     this.title = title;
   }
-  
 
   public String getDescription() {
     return description;
@@ -107,22 +109,28 @@ public class Event implements Serializable{
     this.description = description;
   }
 
- 
-
-  public Event(String location, LocalDateTime initialHour, LocalDateTime finalHour, String title, String description,
-      String tags, Speaker speaker, Set<User> attendance) {
-    super();
-    this.location = location;
-    this.initialHour = initialHour;
-    this.finalHour = finalHour;
-    this.title = title;
-    this.description = description;
-    this.speaker = speaker;
-    this.attendance = attendance;
+  public String getNameImg() {
+    return nameImg;
   }
 
-  public Event() {
-    super();
+  public void setNameImg(String nameImg) {
+    this.nameImg = nameImg;
+  }
+
+  public String getTypeImg() {
+    return typeImg;
+  }
+
+  public void setTypeImg(String typeImg) {
+    this.typeImg = typeImg;
+  }
+
+  public byte[] getImage() {
+    return image;
+  }
+
+  public void setImage(byte[] image) {
+    this.image = image;
   }
 
   public Speaker getSpeaker() {
@@ -140,15 +148,4 @@ public class Event implements Serializable{
   public void setAttendance(Set<User> attendance) {
     this.attendance = attendance;
   }
-
-  public String getLogo() {
-    return logo;
-  }
-
-  public void setLogo(String logo) {
-    this.logo = logo;
-  }
-  
-  
-  
 }

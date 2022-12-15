@@ -103,7 +103,6 @@ const EventList = () => {
     navigate("/addEvent");
   }
 
-
   return (
     <>
       <div className="list row">
@@ -158,10 +157,12 @@ const EventList = () => {
                 >
                   <div>
                     <div>
-                      {event.title}
+                      <img src={`data:${event.typeImg};base64,${event.image}`}
+                      alt=" " className="event-image"/>
+
                     </div>
                     <div>
-                      {event.location}
+                      {event.title}
                     </div>
                   </div>
                 </li>
@@ -181,9 +182,7 @@ const EventList = () => {
               </Link>
             </div>
           ) : (
-            <div>
-              <br />
-            </div>
+            <div />
           )}
         </div>
       </div>

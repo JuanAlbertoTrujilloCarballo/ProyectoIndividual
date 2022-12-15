@@ -1,31 +1,15 @@
 package com.TCI.charlas.controllers;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-
+import com.TCI.charlas.entity.models.Event;
+import com.TCI.charlas.entity.services.IEventService;
+import com.TCI.charlas.utils.ImageUtility;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.TCI.charlas.entity.models.Event;
-import com.TCI.charlas.entity.models.Speaker;
-import com.TCI.charlas.entity.services.IEventService;
-import com.TCI.charlas.entity.services.ISpeakerService;
-import com.TCI.charlas.entity.services.SpeakerService;
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -34,31 +18,61 @@ public class EventController {
   @Autowired
   IEventService eventService;
 
-  @Autowired
-  private ISpeakerService speakerService;
-
   @GetMapping("/event")
   public List<Event> getAllEvents() {
-    return eventService.getAll();
+    List<Event> db = eventService.getAll();
+    db.forEach((x) -> {
+      if (x.getImage() != null){
+        byte[] noZip = ImageUtility.decompressImage(x.getImage());
+      x.setImage(noZip);
+      }
+    });
+    return db;
   }
 
   @GetMapping("/event/{id}")
   public Event getOne(@PathVariable(value = "id") long id) {
-    return eventService.get(id);
+    final Event db = eventService.get(id);
+    if (db.getImage() != null) {
+      return Event.builder()
+              .nameImg(db.getNameImg())
+              .typeImg(db.getTypeImg())
+              .image(ImageUtility.decompressImage(db.getImage()))
+              .initialHour(db.getInitialHour())
+              .finalHour(db.getFinalHour())
+              .description(db.getDescription())
+              .title(db.getTitle())
+              .location(db.getLocation())
+              .speaker(db.getSpeaker())
+              .attendance(db.getAttendance())
+              .id(db.getId())
+              .build();
+    } else {
+      return Event.builder()
+              .initialHour(db.getInitialHour())
+              .finalHour(db.getFinalHour())
+              .description(db.getDescription())
+              .title(db.getTitle())
+              .location(db.getLocation())
+              .speaker(db.getSpeaker())
+              .attendance(db.getAttendance())
+              .id(db.getId())
+              .build();
+    }
+
   }
 
   @PostMapping("/event")
-  public void post(Event event) {
-      /*,
-      @RequestParam("image") MultipartFile multipartFile) throws IOException {
-    String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-    event.setLogo(fileName);
+  public void post(Event event, @RequestParam(value = "file", required = false) MultipartFile image) throws IOException {
+    if (image != null) {
+      String randomID = UUID.randomUUID().toString();
+      String filename = randomID.concat(randomID + image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf(".")));
 
-    //String uploadDir = "C:/Users/Alberto/Desktop/Carpetas/Ciclo/";
-    String uploadDir = "static/images/";
+      event.setNameImg(filename);
+      event.setTypeImg(image.getContentType());
+      event.setImage(ImageUtility.compressImage(image.getBytes()));
+    }
 
-    FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-*/
     eventService.post(event);
   }
 
@@ -79,14 +93,14 @@ public class EventController {
   }
  
   @PutMapping("/editEvent/{id}")
-  public void put(Event event, @PathVariable(value = "id") long id) {
+  public void put(Event event, @PathVariable(value = "id") long id, @RequestParam(value = "file", required = false) MultipartFile image) throws IOException {
+
     eventService.put(event, id);
   }
 
 
   @DeleteMapping("/event/{id}")
   public void delete(@PathVariable(value = "id") long id) throws IOException{
-   eventService.deleteWithImage(id);
     eventService.delete(id);
   }
    

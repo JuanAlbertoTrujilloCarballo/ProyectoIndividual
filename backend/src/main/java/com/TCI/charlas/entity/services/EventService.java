@@ -48,6 +48,11 @@ public class EventService implements IEventService {
   public void put(Event event, long id) {
     eventDao.findById(id).ifPresent((x) -> {
       event.setId(id);
+      if(event.getImage() == null){
+        event.setImage(x.getImage());
+        event.setNameImg(x.getNameImg());
+        event.setTypeImg(x.getTypeImg());
+      }
       eventDao.save(event);
     });
   }
@@ -90,19 +95,6 @@ public class EventService implements IEventService {
         eventDao.save(x);
       });
     });
-  }
-  
-  @Override
-  public void deleteWithImage(long id) throws IOException{
-    eventDao.findById(id).ifPresent((x) -> {
-    Path path = Paths.get("static/images/"+x.getLogo());
-    try {
-      Files.delete(path);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  });
   }
 
 }

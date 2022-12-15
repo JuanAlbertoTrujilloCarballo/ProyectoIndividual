@@ -172,6 +172,8 @@ const Event = props => {
                     Editar Evento
                   </button>
                 </div>
+
+                
               )}
 
             </div>

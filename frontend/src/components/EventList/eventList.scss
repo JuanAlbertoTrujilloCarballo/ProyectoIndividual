@@ -15,7 +15,7 @@
   // padding-top: 0.5cm;
 }
 
-.event-image{
+.event-list-image{
   
   width: 40mm;
   height: 30mm;
@@ -41,4 +41,13 @@ font-size: 1.5em;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.main {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 20px;
 }

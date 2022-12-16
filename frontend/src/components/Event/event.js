@@ -110,13 +110,18 @@ const Event = props => {
     <div className="col-md-6">
       {currentEvent ? (
         <div>
-          <h1 className="title">Event</h1>
-          <div className="element">
-            <label>
-              <strong>Titulo:</strong>
-            </label>{" "}
-            {currentEvent.title}
+          {/* <h1 className="title">Event</h1> */}
+          <div className="title">
+
+            <strong>{currentEvent.title}</strong>
           </div>
+
+          <div className="center-image-event">
+          <img src={`data:${currentEvent.typeImg};base64,${currentEvent.image}`}
+                          alt=" " className="event-image" />
+
+          </div>
+
           <div className="element">
             <label>
               <strong>Hora Inicial:</strong>
@@ -128,6 +133,12 @@ const Event = props => {
               <strong>Hora Final:</strong>
             </label>{" "}
             {currentEvent.finalHour}
+          </div>
+           <div className="element">
+            <label>
+              <strong>Localización:</strong>
+            </label>{" "}
+            {currentEvent.location}
           </div>
           <div className="element">
             <label>
@@ -145,48 +156,48 @@ const Event = props => {
               {currentEvent.speaker.name}
             </div>
           ) : (
-            <div/>
-            )}
+            <div />
+          )}
 
 
 
-              {currentUser && (
-                <div className="sign-event">
-                  <button
-                    className="sign-event-button"
-                    type="button"
-                    onClick={postUserInEvent}
-                  >
-                    Apuntarse
-                  </button>
-                </div>
-              )}
+          {currentUser && (
+            <div className="sign-event">
+              <button
+                className="sign-event-button"
+                type="button"
+                onClick={postUserInEvent}
+              >
+                Apuntarse
+              </button>
+            </div>
+          )}
 
-              {showAdminBoard && (
-                <div className="edit-button">
-                  <button
+          {showAdminBoard && (
+            <div className="edit-button">
+              <button
 
-                    type="button"
-                    onClick={editPage}
-                  >
-                    Editar Evento
-                  </button>
-                </div>
-
-                
-              )}
-
+                type="button"
+                onClick={editPage}
+              >
+                Editar Evento
+              </button>
             </div>
 
-          ) : (
-          <div>
-            <br />
-          </div>
-      )}
+
+          )}
+
         </div>
-      );
+
+      ) : (
+        <div>
+          <br />
+        </div>
+      )}
+    </div>
+  );
 };
 
-      export default Event;
+export default Event;
 
 

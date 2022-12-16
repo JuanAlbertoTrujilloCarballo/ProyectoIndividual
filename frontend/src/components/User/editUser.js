@@ -4,7 +4,7 @@ import UserDataService from "../../service/userService";
 
 import AuthService from "../../service/auth.service";
 
-const editUser = props => {
+const EditUser = props => {
 
   const { id } = useParams();
   let navigate = useNavigate();
@@ -193,5 +193,5 @@ const editUser = props => {
   );
 };
 
-export default editUser;
+export default EditUser;
 

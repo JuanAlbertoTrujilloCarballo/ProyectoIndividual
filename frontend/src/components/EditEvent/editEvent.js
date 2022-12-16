@@ -204,8 +204,12 @@ const EditEvent = props => {
                 name="speaker"
                 className="form-control"
                 onChange={handleSelectChange}>
+                  <option>- -</option>
                 {speaker.map((speaker, index) => (
+                  <>
                   <option key={index} value={speaker.idSpeaker}>{speaker.name}</option>
+                  </>
+                  
                 ))}
               </select>
             </div>

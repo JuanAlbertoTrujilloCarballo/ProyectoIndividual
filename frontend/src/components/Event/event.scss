@@ -1,11 +1,14 @@
+.data-list{
+  justify-content: flex-start;
+}
+
 .element{
-  margin-bottom: 0.5cm;
-  text-align: center;
-  font-size: 0.5cm;
+  font-size: 0.7cm;
+  margin-left: 0.2cm;
 }
 
 .title {
-  font-size: 1.5cm;
+  font-size: 1.0cm;
   text-align: center;
 }
 
@@ -20,4 +23,16 @@
 
 .edit-button{
   text-align: center;
+}
+
+.event-image{
+  width: 60mm;
+  height: 30mm;
+  margin: auto;
+}
+
+.center-image-event{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

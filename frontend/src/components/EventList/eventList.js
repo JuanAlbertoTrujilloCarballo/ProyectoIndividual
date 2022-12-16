@@ -12,10 +12,10 @@ const EventList = () => {
   const [event, setEvent] = useState([]);
   const [currentEvent, setCurrentEvent] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const [searchTitle, setsearchTitle] = useState("");
   const [content, setContent] = useState("");
   const [showAdminBoard, setAdmin] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
+
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
@@ -47,16 +47,10 @@ const EventList = () => {
     retrieveEvent();
   }, []);
 
-  const onChangeSearchTitle = e => {
-    const searchTitle = e.target.value;
-    setsearchTitle(searchTitle);
-  };
-
   const retrieveEvent = () => {
     EventDataService.getAll()
       .then(response => {
         setEvent(response.data);
-        console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -75,69 +69,46 @@ const EventList = () => {
     navigate("/event/" + event.id);
   };
 
-  // const removeAllEvent = () => {
-  //   EventDataService.removeAll()
-  //     .then(response => {
-  //       console.log(response.data);
-  //       refreshList();
-  //     })
-  //     .catch(e => {
-  //       console.log(e);
-  //     });
-  // };
-
-  // const findByTitle = () => {
-  //   EventDataService.findByTitle(searchTitle)
-  //     .then(response => {
-  //       setEvent(response.data);
-  //       console.log(response.data);
-  //     })
-  //     .catch(e => {
-  //       console.log(e);
-  //     });
-  // };
-
   const navigate = useNavigate();
 
   const addPage = () => {
     navigate("/addEvent");
   }
 
+  //intento de searchBar
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchInput(e.target.value);
+  };
+
+  useEffect(() => {
+    // while (searchInput.value >= 0) {}
+    if (searchInput.length > 0) {
+      let auxEvent = Object.assign(event);
+      let result = []
+      for(let i = 0; i < auxEvent.length; i++){
+        if(auxEvent[i].title.match(searchInput)){
+          result.push(auxEvent[i])
+        }
+      }
+      setEvent(result);
+    }else if (searchInput.length == 0){
+      retrieveEvent();
+      setEvent(event);
+    }
+  },[searchInput]);
+
   return (
     <>
       <div className="list row">
-        <div className="col-md-8">
-          {showAdminBoard && (
-            <div className="create-event-div">
-              <button
-                className="add-button"
-                type="button"
-                onClick={addPage}
-              >
-                Crear nuevo evento
-              </button>
-
-            </div>
-          )}
-
-          {/* <div className="input-group mb-3">
+        <div className="center-list">
           <input
             type="text"
-            className="form-control"
-            placeholder="Search by name"
-            value={searchTitle}
-            onChange={onChangeSearchTitle}
-          />
-          <div className="input-group-append">
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={findByTitle}
-            >
-              Search
-            </button>
-          </div>
-        </div> */}
+            placeholder="Search here"
+            onChange={handleSearch}
+            value={searchInput} />
         </div>
 
         {/* aqui empieza la lista de eventos */}
@@ -159,7 +130,7 @@ const EventList = () => {
                     <div className="list-event">
                       <div className="col">
                         <img src={`data:${event.typeImg};base64,${event.image}`}
-                          alt=" " className="event-image" />
+                          alt=" " className="event-list-image" />
 
                       </div>
                       <div className="event-title">
@@ -174,6 +145,19 @@ const EventList = () => {
           </div>
 
           {/* aqui termina la lista de eventos */}
+
+          {showAdminBoard && (
+            <div className="create-event-div">
+              <button
+                className="add-button"
+                type="button"
+                onClick={addPage}
+              >
+                Crear nuevo evento
+              </button>
+
+            </div>
+          )}
 
           <div className="col-md-6">
             {currentEvent ? (

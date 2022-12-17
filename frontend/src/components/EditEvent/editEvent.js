@@ -14,7 +14,7 @@ const EditEvent = props => {
     location: "",
     title: "",
     description: "",
-    speaker:"",
+    speaker: "",
   };
   const [currentEvent, setCurrentEvent] = useState(initialEventState);
   const [speaker, setSpeaker] = useState([]);
@@ -40,9 +40,10 @@ const EditEvent = props => {
     // const { name, value } = e.target;
     // setSpeaker({ ...speaker, [name]: value });
     // setSpeaker(e.target.value);
-
-    setCurrentEvent({ ...currentEvent, speaker: e.target.value });
-    console.log(currentEvent);
+    if (e.target.value != "- -") {
+      setCurrentEvent({ ...currentEvent, speaker: e.target.value });
+      console.log(currentEvent);
+    }
   }
 
 
@@ -92,7 +93,7 @@ const EditEvent = props => {
 
   const updateEvent = () => {
     EventDataService.update(currentEvent.id, currentEvent)
-      .then(response => {     
+      .then(response => {
         console.log(response.data);
         setMessage("The event was updated successfully!");
         navigate("/eventList");
@@ -112,17 +113,6 @@ const EditEvent = props => {
         console.log(e);
       });
   };
-
-  // const postSpeakerInEvent = () => {
-  //   EventDataService.speakerInEvent(currentEvent.id, speaker.id)
-  //     .then(response => {
-  //       console.log(response.data);
-  //       navigate("/eventList");
-  //     })
-  //     .catch(e => {
-  //       console.log(e);
-  //     });
-  // };
 
   return (
 
@@ -192,6 +182,7 @@ const EditEvent = props => {
                 required
                 value={currentEvent.description}
                 onChange={handleInputChange}
+
                 name="description"
               />
             </div>
@@ -204,12 +195,12 @@ const EditEvent = props => {
                 name="speaker"
                 className="form-control"
                 onChange={handleSelectChange}>
-                  <option>- -</option>
+                <option>- -</option>
                 {speaker.map((speaker, index) => (
                   <>
-                  <option key={index} value={speaker.idSpeaker}>{speaker.name}</option>
+                    <option key={index} value={speaker.idSpeaker}>{speaker.name}</option>
                   </>
-                  
+
                 ))}
               </select>
             </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthService from "../../service/auth.service";
 import UserDataService from "../../service/userService";
+import "./Profile.scss"
 
 const Profile = () => {
 
@@ -34,7 +35,7 @@ const Profile = () => {
   const { id } = useParams();
   const [User, setUser] = useState(initialUserState);
 
-  
+
   const getUser = id => {
     UserDataService.get(currentUser.id)
       .then(response => {
@@ -56,7 +57,7 @@ const Profile = () => {
     <div className="container">
       <header className="jumbotron">
         <h3>
-          Usuario <strong>{currentUser.username}</strong> 
+          Usuario <strong>{currentUser.username}</strong>
         </h3>
       </header>
       {/* <p>
@@ -66,19 +67,19 @@ const Profile = () => {
       <p>
         <strong>Id:</strong> {currentUser.id}
       </p>
-     
+
       <p>
         <strong>Nombre:</strong> {User.name}
       </p>
       <p>
         <strong>DNI:</strong> {User.dni}
-      </p> 
+      </p>
       <p>
         <strong>Edad:</strong> {User.age}
-      </p> 
+      </p>
       <p>
         <strong>Telefono:</strong> {User.phone}
-      </p> 
+      </p>
       <p>
         <strong>Email:</strong> {currentUser.email}
       </p>
@@ -88,19 +89,21 @@ const Profile = () => {
         {currentUser.roles &&
           currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
       </ul> */}
-
-      <a href="login">
-        <button onClick={logOut}>
-          LogOut
-        </button>
-      </a>
-      <div>
-
-          <button onClick={Edit}>
+   
+   
+       
+        <div className="buttons-distribution">
+        <a href="login">
+          <button onClick={logOut} className="button-85">
+            LogOut
+          </button>
+        </a>
+          <button onClick={Edit} className="button-62">
             Edit
           </button>
-
-      </div>
+        </div>
+      
+      
     </div>
   );
 };

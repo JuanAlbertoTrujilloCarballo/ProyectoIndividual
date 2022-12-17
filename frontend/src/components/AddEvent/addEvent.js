@@ -131,7 +131,6 @@ const AddEvent = () => {
               value={Event.location}
               onChange={handleInputChange}
               name="location"
-              pattern="[A-Za-z]"
             />
           </div>
 

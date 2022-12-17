@@ -203,7 +203,7 @@ The summary.
 
 ##### Frontend
 
-[![Angular][angular.io]][angular.url]
+[![React][react.io]][react.url]
 
 To get started, create an empty folder on your computer and open your Visual Studio Code.
 

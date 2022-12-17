@@ -1,1 +1,0 @@
-CREATE SCHEMA `charlas_itc` ;

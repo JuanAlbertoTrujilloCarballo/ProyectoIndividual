@@ -36,6 +36,16 @@
 ## About this project
 
 ### Why I did it?
+
+
+How was this created? Well, the idea was simple, a website that can show a list of events about the danger of the social media, organized by the ITC, and after my decision I started working on this project.
+
+The idea was that the people could look the list of the events, register or login, and signin in the event they want to assist, other than that, the website has a system where the administrator can create or edit events in the frontend from it computer or mobile phone.
+
+And how I chosen about this topic, well, I threw a pair of dices and selected one of the things that they listed in the area the dices selected.
+
+(ITC stands for "Instituto Tecnológico de Canarias")
+
 ---
 
 ## Data model
@@ -272,9 +282,9 @@ Both are constituted by the use of components, therefore, they are a good exampl
 
   - React is mostly used to build interactive UI components with frequently variable data, whereas Angular.js is used to build complex enterprise apps like progressive web apps and single-page apps.
 
-  - Angular JS is used to build single-page applications using HTML and TypeScript. React JS is commonly used to create user interfaces for single-page applications from isolated components.
+  - React JS is commonly used to create user interfaces for single-page applications from isolated components. Angular JS is used to build single-page applications using HTML and TypeScript.
 
-  - Angular is a part of the MEAN stack and is very compatible with many code editors. It’s also considered to develop dynamic websites and web apps. On the other hand, React is widely used to develop reusable HTML elements for front end development.
+  - React is widely used to develop reusable HTML elements for front end development. On the other hand, Angular is a part of the MEAN stack and is very compatible with many code editors. It’s also considered to develop dynamic websites and web apps.
 
 Backend: 
 
@@ -302,7 +312,7 @@ As a conclusion of this project, I have to say that this is not my best work, bu
 
 ## Links and references
 
-  - [tcruraw repository][bezkoderRepository.url]
+  - [tcrurav repository][tcrurav.url]
 
   - [![Postman][postman.io]][postman.url]
 

@@ -336,6 +336,13 @@ As a conclusion of this project, I have to say that this is not my best work, bu
 [relacionalDiagram.img]: https://github.com/JuanAlbertoTrujilloCarballo/ProyectoIndividual/blob/develop/images/Diagrama%20relacional.drawio.png
 [useCase.img]: https://github.com/JuanAlbertoTrujilloCarballo/ProyectoIndividual/blob/develop/images/Casos%20de%20uso.png
 
+[Postman.io]: https://img.shields.io/badge/POSTMAN%20Documentation-orange?style=for-the-badge&logo=postman&logoColor=black
+[postman.url]: https://documenter.getpostman.com/view/23478612/2s8YzXwLiH
+
+[base64.io]: https://img.shields.io/badge/Base64-green?style=for-the-badge
+[base64.url]: https://www.base64encode.org
+
+
 [tcrurav.url]: https://github.com/tcrurav/SpringReactHooksJWTAuthMySQL
 
 [author-alberto.io]: https://img.shields.io/badge/-Juan%20Alberto%20Trujillo%20Carballo-aqua?style=for-the-badge&label=author&logo=Dragonframe&labelColor=black
@@ -352,3 +359,6 @@ As a conclusion of this project, I have to say that this is not my best work, bu
 [spring2.io]: https://img.shields.io/badge/Spring-green?style=for-the-badge&logo=spring&logoColor=black
 [spring.io]: https://img.shields.io/badge/Backend-Spring-green?style=flat-square&logo=spring&logoColor=green
 [spring.url]: https://spring.io
+
+[sequelize.io]: https://img.shields.io/badge/Backend-Sequelize-blue?style=flat-square&logo=Sequelize&logoColor=blue
+[sequelize.url]: https://sequelize.org

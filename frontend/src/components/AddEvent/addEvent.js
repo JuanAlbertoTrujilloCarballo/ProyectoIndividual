@@ -35,6 +35,7 @@ const vtitle = (value) => {
 };
 
 const vdescription = (value) => {
+  console.log("hola")
   if (value.length < 3 || value.length > 20) {
     return (
       <div className="alert alert-danger" role="alert">

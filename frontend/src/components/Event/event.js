@@ -7,6 +7,8 @@ import AuthService from "../../service/auth.service";
 
 const Event = props => {
 
+
+
   const [showAdminBoard, setAdmin] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
@@ -30,6 +32,7 @@ const Event = props => {
     title: "",
     description: "",
     speaker: "",
+    attendance: [],
   };
 
   const [currentEvent, setCurrentEvent] = useState(initialEventState);
@@ -39,56 +42,20 @@ const Event = props => {
     EventDataService.get(id)
       .then(response => {
         setCurrentEvent(response.data);
-        console.log(response.data);
+
       })
       .catch(e => {
         console.log(e);
       });
   };
+
+  let InitialDateTime = currentEvent.initialHour.split('T');
+  let FinalDateTime = currentEvent.finalHour.split('T');
 
   useEffect(() => {
     if (id)
       getEvent(id);
   }, [id]);
-
-
-  const handleInputChange = event => {
-    const { name, value } = event.target;
-    setCurrentEvent({ ...currentEvent, [name]: value });
-  };
-
-  const updatePublished = status => {
-    var data = {
-      id: currentEvent.id,
-      initialHour: currentEvent.initialHour,
-      finalHour: currentEvent.finalHour,
-      title: currentEvent.title,
-      description: currentEvent.description,
-      location: currentEvent.location,
-      speaker: currentEvent.speaker,
-    };
-
-    EventDataService.update(currentEvent.id, data)
-      .then(response => {
-        setCurrentEvent({ ...currentEvent, url: status });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
-  const updateEvent = () => {
-    EventDataService.update(currentEvent.id, currentEvent)
-      .then(response => {
-        console.log(response.data);
-        setMessage("The event was updated successfully!");
-        navigate("/eventList");
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
 
   const editPage = () => {
     navigate("/editEvent/" + currentEvent.id);
@@ -105,6 +72,16 @@ const Event = props => {
       });
   };
 
+  const deleteUserInEvent = () => {
+    EventDataService.userOutEvent(currentEvent.id, currentUser.id)
+      .then(response => {
+        console.log(response.data);
+        navigate("/eventList");
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
 
   return (
     <div className="col-md-6">
@@ -112,29 +89,27 @@ const Event = props => {
         <div>
           {/* <h1 className="title">Event</h1> */}
           <div className="title">
-
             <strong>{currentEvent.title}</strong>
           </div>
-
           <div className="center-image-event">
-          <img src={`data:${currentEvent.typeImg};base64,${currentEvent.image}`}
-                          alt=" " className="event-image" />
-
+            <img src={`data:${currentEvent.typeImg};base64,${currentEvent.image}`}
+              alt=" " className="event-image" />
+          </div>
+          <div className="element">
+            <label>
+              <strong>Fecha Inicial:</strong>
+            </label>{" "}
+            {InitialDateTime[0] + " " + InitialDateTime[1]}
           </div>
 
           <div className="element">
             <label>
-              <strong>Hora Inicial:</strong>
+              <strong>Fecha Final:</strong>
             </label>{" "}
-            {currentEvent.initialHour}
+            {FinalDateTime[0] + " " + FinalDateTime[1]}
           </div>
+
           <div className="element">
-            <label>
-              <strong>Hora Final:</strong>
-            </label>{" "}
-            {currentEvent.finalHour}
-          </div>
-           <div className="element">
             <label>
               <strong>Localización:</strong>
             </label>{" "}
@@ -159,17 +134,28 @@ const Event = props => {
             <div />
           )}
 
-
-
           {currentUser && (
             <div className="sign-event">
-              <button
-                className="sign-event-button"
-                type="button"
-                onClick={postUserInEvent}
-              >
-                Apuntarse
-              </button>
+              {currentEvent.attendance.map((attendance) => (
+                (attendance.id !== currentUser.id ?
+                  <button
+                    className="sign-event-button"
+                    type="button"
+                    onClick={postUserInEvent}
+                  >
+                    Apuntarse
+                  </button>
+
+                  :
+                  <button
+                    className="sign-event-button"
+                    type="button"
+                    onClick={deleteUserInEvent}
+                  >
+                    Quitarse
+                  </button>
+                )
+              ))}
             </div>
           )}
 

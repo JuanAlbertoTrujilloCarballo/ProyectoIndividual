@@ -337,7 +337,7 @@ As a conclusion of this project, I have to say that this is not my best work, bu
 [useCase.img]: https://github.com/JuanAlbertoTrujilloCarballo/ProyectoIndividual/blob/develop/images/Casos%20de%20uso.png
 
 [Postman.io]: https://img.shields.io/badge/POSTMAN%20Documentation-orange?style=for-the-badge&logo=postman&logoColor=black
-[postman.url]: https://documenter.getpostman.com/view/23478612/2s8YzXwLiH
+[postman.url]: https://documenter.getpostman.com/view/23478624/2s8YzZQzfZ
 
 [base64.io]: https://img.shields.io/badge/Base64-green?style=for-the-badge
 [base64.url]: https://www.base64encode.org

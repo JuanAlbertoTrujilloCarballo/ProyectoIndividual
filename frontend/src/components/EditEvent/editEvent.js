@@ -1,11 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
+import Form from "react-validation/build/form";
+import CheckButton from "react-validation/build/button";
 import EventDataService from "../../service/eventService";
 import SpeakerDataService from "../../service/speakerService";
+
+
+const required = (value) => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        Este campo es requerido!
+      </div>
+    );
+  }
+};
 
 const EditEvent = props => {
   const { id } = useParams();
   let navigate = useNavigate();
+  const form = useRef();
+  const checkBtn = useRef();
+
 
   const initialEventState = {
     id: null,
@@ -70,37 +86,34 @@ const EditEvent = props => {
   };
 
 
-  const updatePublished = status => {
-    var data = {
-      id: currentEvent.id,
-      initialHour: currentEvent.initialHour,
-      finalHour: currentEvent.finalHour,
-      title: currentEvent.title,
-      description: currentEvent.description,
-      location: currentEvent.location,
-      speaker: currentEvent.speaker.idSpeaker,
-    };
 
-    EventDataService.update(currentEvent.id, data)
-      .then(response => {
-        setCurrentEvent({ ...currentEvent, url: status });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
 
-  const updateEvent = () => {
-    EventDataService.update(currentEvent.id, currentEvent)
-      .then(response => {
-        console.log(response.data);
-        setMessage("The event was updated successfully!");
-        navigate("/eventList");
-      })
-      .catch(e => {
-        console.log(e);
-      });
+  const updateEvent = (e) => {
+    e.preventDefault();
+
+    setMessage("");
+
+    form.current.validateAll();
+
+    if (checkBtn.current.context._errors.length === 0) {
+      EventDataService.update(currentEvent.id, currentEvent)
+        .then(response => {
+          console.log(response.data);
+          setMessage("The event was updated successfully!");
+          navigate("/eventList");
+        },
+          (error) => {
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
+
+            setMessage(resMessage);
+          }
+        );
+    }
   };
 
   const deleteEvent = () => {
@@ -120,7 +133,7 @@ const EditEvent = props => {
       {currentEvent ? (
         <div className="edit-form">
           <h4>Event</h4>
-          <form>
+          <Form onSubmit={updateEvent} ref={form}>
             <div className="form-group">
               <label htmlFor="initialHour">Hora Inicial</label>
               <input
@@ -131,6 +144,7 @@ const EditEvent = props => {
                 value={currentEvent.initialHour}
                 onChange={handleInputChange}
                 name="initialHour"
+                validations={[required]}
               />
             </div>
 
@@ -144,6 +158,7 @@ const EditEvent = props => {
                 value={currentEvent.finalHour}
                 onChange={handleInputChange}
                 name="finalHour"
+                validations={[required]}
               />
             </div>
 
@@ -157,6 +172,7 @@ const EditEvent = props => {
                 value={currentEvent.location}
                 onChange={handleInputChange}
                 name="location"
+                validations={[required]}
               />
             </div>
 
@@ -170,6 +186,7 @@ const EditEvent = props => {
                 value={currentEvent.title}
                 onChange={handleInputChange}
                 name="title"
+                validations={[required]}
               />
             </div>
 
@@ -182,8 +199,8 @@ const EditEvent = props => {
                 required
                 value={currentEvent.description}
                 onChange={handleInputChange}
-
                 name="description"
+                validations={[required]}
               />
             </div>
 
@@ -205,8 +222,7 @@ const EditEvent = props => {
               </select>
             </div>
 
-          </form>
-          {/* <div className="form-group">
+            {/* <div className="form-group">
               <label>
                 <strong>Status:</strong>
               </label>
@@ -230,18 +246,24 @@ const EditEvent = props => {
             </button>
           )} */}
 
-          <button className="badge badge-danger mr-2" onClick={deleteEvent}>
-            Delete
-          </button>
+            <button className="badge badge-danger mr-2" onClick={deleteEvent}>
+              Delete
+            </button>
 
-          <button
-            type="submit"
-            className="badge badge-success"
-            onClick={updateEvent}
-          >
-            Update
-          </button>
-          <p>{message}</p>
+
+            {message && (
+              <div className="form-group">
+                <div className="alert alert-danger" role="alert">
+                  {message}
+                </div>
+              </div>
+            )}
+
+            <button className="badge badge-success">
+              Editar
+            </button>
+            <CheckButton style={{ display: "none" }} ref={checkBtn} />
+          </Form>
         </div>
       ) : (
         <div>

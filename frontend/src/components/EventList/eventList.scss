@@ -1,7 +1,8 @@
 .create-event-div{
-  padding-left: 5cm;
-  padding-top: 0.5cm;
-  padding-bottom: 0.5cm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-button{

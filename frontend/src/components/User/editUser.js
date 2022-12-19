@@ -1,13 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
+import Form from "react-validation/build/form";
+import CheckButton from "react-validation/build/button";
 import UserDataService from "../../service/userService";
 
 import AuthService from "../../service/auth.service";
+
+const required = (value) => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        Este campo es requerido!
+      </div>
+    );
+  }
+};
 
 const EditUser = props => {
 
   const { id } = useParams();
   let navigate = useNavigate();
+  const form = useRef();
+  const checkBtn = useRef();
 
   const initialUserState = {
     id: null,
@@ -45,45 +59,39 @@ const EditUser = props => {
     setCurrentUser({ ...currentUser, [name]: value });
   };
 
-  const updatePublished = status => {
-    var data = {
-      id: currentUser.id,
-      dni: currentUser.dni,
-      name: currentUser.name,
-      username: currentUser.username,
-      age: currentUser.age,
-      phone: currentUser.phone,
-      email: currentUser.email,
-      password: currentUser.password,
-    };
+  const updateUser = (e) => {
+    e.preventDefault();
 
-    UserDataService.update(currentUser.id, data)
-      .then(response => {
-        setCurrentUser({ ...currentUser, url: status });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
+    setMessage("");
 
-  const updateUser = () => {
-    UserDataService.update(currentUser.id, currentUser)
-      .then(response => {
-        console.log(response.data);
-        setMessage("The user was updated successfully!");
-        navigate("/profile");
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    form.current.validateAll();
+
+    if (checkBtn.current.context._errors.length === 0) {
+      UserDataService.update(currentUser.id, currentUser)
+        .then(response => {
+          console.log(response.data);
+          setMessage("The user was updated successfully!");
+          navigate("/profile");
+        },
+          (error) => {
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
+
+            setMessage(resMessage);
+          }
+        );
+    }
   };
   return (
 
     <div className="col-md-6">
       {currentUser && (
         <div className="edit-form">
-          <form>
+          <Form onSubmit={updateUser} ref={form}>
             <div className="form-group">
               <label htmlFor="name">Nombre</label>
               <input
@@ -94,6 +102,7 @@ const EditUser = props => {
                 value={currentUser.name}
                 onChange={handleInputChange}
                 name="name"
+                validations={[required]}
               />
             </div>
 
@@ -107,6 +116,7 @@ const EditUser = props => {
                 value={currentUser.dni}
                 onChange={handleInputChange}
                 name="dni"
+                validations={[required]}
               />
             </div>
 
@@ -120,6 +130,7 @@ const EditUser = props => {
                 value={currentUser.age}
                 onChange={handleInputChange}
                 name="age"
+                validations={[required]}
               />
             </div>
 
@@ -133,6 +144,7 @@ const EditUser = props => {
                 value={currentUser.phone}
                 onChange={handleInputChange}
                 name="phone"
+                validations={[required]}
               />
             </div>
 
@@ -146,10 +158,11 @@ const EditUser = props => {
                 value={currentUser.username}
                 onChange={handleInputChange}
                 name="username"
+                validations={[required]}
               />
             </div>
 
-            
+
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input
@@ -160,6 +173,7 @@ const EditUser = props => {
                 value={currentUser.email}
                 onChange={handleInputChange}
                 name="email"
+                validations={[required]}
               />
             </div>
 
@@ -173,23 +187,21 @@ const EditUser = props => {
                 value={currentUser.password}
                 onChange={handleInputChange}
                 name="password"
+                validations={[required]}
               />
             </div>
 
-          </form>
-
-          <button
-            type="submit"
-            className="badge badge-success"
-            onClick={updateUser}
-          >
-            Actualizar
-          </button>
-            )
+            <button className="badge badge-success">
+              Actualizar
+            </button>
+            <CheckButton style={{ display: "none" }} ref={checkBtn} />
+          </Form>
+          )
 
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 

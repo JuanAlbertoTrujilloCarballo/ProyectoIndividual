@@ -16,10 +16,19 @@
     - [Entities and attributes](#entities-and-attributes)
     - [Relationships between tables](#relationships-between-tables)
     - [Data model diagrams](#data-model-diagrams)
+- [](#)
+- [User requirements](#user-requirements)
+    - [Platform:](#platform)
+    - [Access:](#access)
+    - [Interfaces:](#interfaces)
+    - [Actions:](#actions)
+    - [Validations:](#validations)
 - [Use cases](#use-cases)
 - [Description of system operation and technical specifications](#description-of-system-operation-and-technical-specifications)
   - [Technical specifications](#technical-specifications)
-- [Interfaces](#interfaces)
+- [Interfaces](#interfaces-1)
+    - [Usability and accessibility](#usability-and-accessibility)
+- [Right now our application does not contain a great number of elements that are accessible for a lot of users, but we will eventually work on this in the future so that more people can use our application with convenience.](#right-now-our-application-does-not-contain-a-great-number-of-elements-that-are-accessible-for-a-lot-of-users-but-we-will-eventually-work-on-this-in-the-future-so-that-more-people-can-use-our-application-with-convenience)
 - [Manuals](#manuals)
   - [Installation guide](#installation-guide)
     - [Requirements](#requirements)
@@ -58,10 +67,19 @@ Our first step will be analyze the data model of our project following the next 
     - [Entities and attributes](#entities-and-attributes)
     - [Relationships between tables](#relationships-between-tables)
     - [Data model diagrams](#data-model-diagrams)
+- [](#)
+- [User requirements](#user-requirements)
+    - [Platform:](#platform)
+    - [Access:](#access)
+    - [Interfaces:](#interfaces)
+    - [Actions:](#actions)
+    - [Validations:](#validations)
 - [Use cases](#use-cases)
 - [Description of system operation and technical specifications](#description-of-system-operation-and-technical-specifications)
   - [Technical specifications](#technical-specifications)
-- [Interfaces](#interfaces)
+- [Interfaces](#interfaces-1)
+    - [Usability and accessibility](#usability-and-accessibility)
+- [Right now our application does not contain a great number of elements that are accessible for a lot of users, but we will eventually work on this in the future so that more people can use our application with convenience.](#right-now-our-application-does-not-contain-a-great-number-of-elements-that-are-accessible-for-a-lot-of-users-but-we-will-eventually-work-on-this-in-the-future-so-that-more-people-can-use-our-application-with-convenience)
 - [Manuals](#manuals)
   - [Installation guide](#installation-guide)
     - [Requirements](#requirements)
@@ -149,6 +167,46 @@ UML diagram:
 Relational Model:
 
 ![relacionalDiagram][relacionalDiagram.img]
+---
+
+## User requirements
+
+#### Platform:
+- **P1**. This application comes as a website that you can use wherever you want.
+- **P2**. You can use it on mobile devices or tablets.
+
+#### Access:
+- **A1**. The app has a guest screen that can be accessed without being logged in.
+- **A2**. To assist a event you must be registered as a user, an administrator will check that everything is correct.
+- **A3**. As an administrator you can create, edit or delete data.
+  - **A3.1**. As an administrator you can create, update or delete an event.
+- **A4**. As a user you can edit your attendance.
+  - **A4.2**. As a user you can delete your attendance when it is finished.
+
+#### Interfaces:
+
+- **I1**. The application has three main interface where you can see a list of the events.
+- **I2**. In the first main interface, you can navigate between information, login or event details.
+  - **I2.1**. You will find a form and some actions in login interface.
+    - **I2.1.1**. You will be able to login to these interfaces by filling in the form with your account data.
+    - **I2.1.2**. You will be able to register if you do not have an account by clicking on a button.
+- **I3**. As a user you will be able to find more options than before.
+  - **I3.1**. You will be able to make the attendance for an event.
+  - **I3.2**. You will be able to log out.
+- **I4**. As a administrator, you will be able to see the second main interface.
+  - **I4.1**. You will be able to add new types of events.
+  - **I4.2**. You will be able to edit or delete existing events.
+  - **I4.3**. You will be able to delete user attendances.
+
+
+#### Actions:
+
+- **A1**. User actions will be accompanied by comments and notifications when they are performed.
+- **A2**. When entering data in the form, it is validated that the fields aren't empties.
+
+#### Validations:
+
+- **V1**. The web will show an error when you try to register and left an empty input.
 
 ---
 
@@ -185,7 +243,11 @@ The summary.
  
 ![image](https://github.com/JuanAlbertoTrujilloCarballo/ProyectoIndividual/blob/develop/images/interfaces.jpg)
 
+My [Prototype][figma.url].
 
+#### Usability and accessibility
+
+Right now our application does not contain a great number of elements that are accessible for a lot of users, but we will eventually work on this in the future so that more people can use our application with convenience.
 ---
 
 ## Manuals
@@ -335,6 +397,8 @@ As a conclusion of this project, I have to say that this is not my best work, bu
 [umlDiagram.img]: https://github.com/JuanAlbertoTrujilloCarballo/ProyectoIndividual/blob/develop/images/Diagrama%20UML.png
 [relacionalDiagram.img]: https://github.com/JuanAlbertoTrujilloCarballo/ProyectoIndividual/blob/develop/images/Diagrama%20relacional.drawio.png
 [useCase.img]: https://github.com/JuanAlbertoTrujilloCarballo/ProyectoIndividual/blob/develop/images/Casos%20de%20uso.png
+
+[figma.url]: https://www.figma.com/file/kDMTJsLkJbGfu2iqcOaC8Q/Pagina-web?node-id=0%3A1&t=eaEjJGFikqEoalJT-1
 
 [Postman.io]: https://img.shields.io/badge/POSTMAN%20Documentation-orange?style=for-the-badge&logo=postman&logoColor=black
 [postman.url]: https://documenter.getpostman.com/view/23478624/2s8YzZQzfZ

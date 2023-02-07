@@ -4,6 +4,8 @@ import com.TCI.charlas.entity.models.Event;
 import com.TCI.charlas.entity.services.IEventService;
 import com.TCI.charlas.utils.ImageUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -95,15 +97,26 @@ public class EventController {
   @PutMapping("/editEvent/{id}")
   public void put(Event event, @PathVariable(value = "id") long id, @RequestParam(value = "file", required = false) MultipartFile image) throws IOException {
 
+    if (image != null) {
+      String randomID = UUID.randomUUID().toString();
+      String filename = randomID.concat(randomID + image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf(".")));
+
+      event.setNameImg(filename);
+      event.setTypeImg(image.getContentType());
+      event.setImage(ImageUtility.compressImage(image.getBytes()));
+    }
     eventService.put(event, id);
   }
-
 
   @DeleteMapping("/event/{id}")
   public void delete(@PathVariable(value = "id") long id) throws IOException{
     eventService.delete(id);
   }
    
-  
+  //EXPORTAR PDF
+  @GetMapping("/event/exportInvoice")
+  public ResponseEntity<Resource> exportInvoice(@RequestParam int idEvent, @RequestParam String location){
+    return this.eventService.exportInvoice(idEvent, location);
+  }
  
 }

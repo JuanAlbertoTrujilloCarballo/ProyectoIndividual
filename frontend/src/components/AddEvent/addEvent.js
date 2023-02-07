@@ -14,6 +14,8 @@ const required = (value) => {
   }
 };
 
+//la de abajo no me funciona no se porque
+
 const vlocation = (value) => {
   if (value.length < 6 || value.length > 20) {
     return (

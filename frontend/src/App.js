@@ -20,6 +20,7 @@ import BoardUser from "./components/Boards/userBoard";
 import BoardAdmin from "./components/Boards/adminBoard";
 import Header from './components/Header/header';
 import EditUser from './components/User/editUser';
+import Reports from './pages/Reports/report'
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <Route path="/user/:id" element={<EditUser/>}/>
             <Route path="/profile" element={<Profile />} />
             <Route path="/user" element={<BoardUser />} />
+            <Route path="/report" element={<Reports />} />
           </Routes>
         </Router>
       </>

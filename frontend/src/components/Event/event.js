@@ -7,8 +7,6 @@ import AuthService from "../../service/auth.service";
 
 const Event = props => {
 
-
-
   const [showAdminBoard, setAdmin] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
@@ -42,7 +40,8 @@ const Event = props => {
     EventDataService.get(id)
       .then(response => {
         setCurrentEvent(response.data);
-
+        console.log(response.data);
+        console.log("id " + currentEvent.attendance.id);
       })
       .catch(e => {
         console.log(e);
@@ -51,6 +50,7 @@ const Event = props => {
 
   let InitialDateTime = currentEvent.initialHour.split('T');
   let FinalDateTime = currentEvent.finalHour.split('T');
+  let comprobarAttendance = currentEvent.attendance.length
 
   useEffect(() => {
     if (id)
@@ -136,6 +136,22 @@ const Event = props => {
 
           {currentUser && (
             <div className="sign-event">
+              {currentEvent.attendance.length === 0 ?
+                <button
+                  className="sign-event-button"
+                  type="button"
+                  onClick={postUserInEvent}
+                >
+                  Apuntarse
+                </button>
+                :
+                <div />
+              }
+            </div>
+          )}
+
+          {currentUser && (
+            <div className="sign-event">
               {currentEvent.attendance.map((attendance) => (
                 (attendance.id !== currentUser.id ?
                   <button
@@ -145,7 +161,6 @@ const Event = props => {
                   >
                     Apuntarse
                   </button>
-
                   :
                   <button
                     className="sign-event-button"

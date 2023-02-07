@@ -34,7 +34,10 @@ export default function Header() {
             Event
           </a>
           <a href="/home" className="header-link">
-            Información
+            Information
+          </a>
+          <a href="/report" className="header-link">
+            Reports
           </a>
           {/*<div>
            <li className="nav-item">
